@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "Tools",
         component: () => import("@/views/tools/index.vue"),
         meta: {
-          title: "工具"
+          title: "工作台"
         }
       },
       {
@@ -30,7 +30,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "About",
         component: () => import("@/views/about/index.vue"),
         meta: {
-          title: "关于",
+          title: "我的",
           noCache: true
         }
       }

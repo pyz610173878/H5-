@@ -7,9 +7,10 @@ const onClickRight = () => {
 </script>
 
 <template>
-  <van-nav-bar fixed placeholder @click-right="onClickRight">
+  <van-nav-bar fixed placeholder @click-right="onClickRight" title="质量管理系统">
     <template #right>
-      <svg-icon class="text-[18px]" :name="useDarkMode() ? 'light' : 'dark'" />
+      <!-- <svg-icon class="text-[18px]" :name="useDarkMode() ? 'light' : 'dark'" /> -->
+      
     </template>
   </van-nav-bar>
 </template>
