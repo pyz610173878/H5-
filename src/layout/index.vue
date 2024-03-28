@@ -4,6 +4,7 @@ import NavBar from "@/components/NavBar/index.vue";
 import { useCachedViewStoreHook } from "@/store/modules/cachedView";
 import { useDarkMode } from "@/hooks/useToggleDarkMode";
 import { computed } from "vue";
+import Card from "@/components/Card/index.vue";
 
 const cachedViews = computed(() => {
   return useCachedViewStoreHook().cachedViewList;
@@ -19,8 +20,10 @@ const cachedViews = computed(() => {
           <component :is="Component" />
         </keep-alive>
       </router-view>
+      <!-- 路由页面跳转 -->
       <tabbar />
     </van-config-provider>
+    
   </div>
 </template>
 

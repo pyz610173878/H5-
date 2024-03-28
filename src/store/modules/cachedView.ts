@@ -6,7 +6,8 @@ export const useCachedViewStore = defineStore({
   id: "cached-view",
   state: () => ({
     // 缓存页面 keepAlive
-    cachedViewList: [] as string[]
+    cachedViewList: [] as string[],
+    color: "green"
   }),
   actions: {
     addCachedView(view: toRouteType) {

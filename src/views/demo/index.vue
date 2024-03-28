@@ -1,10 +1,14 @@
 <script setup lang="ts" name="Demo">
 import { reactive } from "vue";
-
-
+import Card from "@/components/Card/index.vue";
+import Test from "@/components/Test/index.vue";
+import about from "@/views/about/index.vue";
 </script>
 
 <template>
+  <svg-icon name="user" />
+  <svg-icon name="work" />
+  <!-- <p class="text-4xl">12312</p> -->
   <!-- <div class="demo-content px-[12px]">
     <img
       class="block w-[120px] mx-auto mb-[20px] pt-[30px]"
@@ -31,5 +35,5 @@ import { reactive } from "vue";
       </p>
     </div>
   </div> -->
-  
+
 </template>

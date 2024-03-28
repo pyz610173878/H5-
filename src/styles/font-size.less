@@ -1,0 +1,148 @@
+// 公共样式——文字类
+
+// 我感觉字体可以设置成一个变量。然后在不同的地方引用这个变量。
+
+
+// 基础文字类型(字体类很少存在相同的基础样式）
+
+.sl-text--base {
+  font-family: PingFang SC;
+  font-weight: 400;
+}
+
+
+// 中文IOS/辅助/标签栏辅助文字
+// 比如首页中的日期
+.sl-text--10 {
+  font-family: PingFang SC;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+// 1. 通用字体——小号
+
+.sl-text--12 {
+  font-family: PingFang SC;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+}
+
+//styleName: 中文IOS/正文/正文2;
+// 比如当前状态
+.sl-text--13 {
+  font-family: PingFang SC;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 19px;
+  color: #909090;
+}
+
+//styleName: 中文IOS/正文/正文3;
+.sl-text--14 {
+  font-family: PingFang SC;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #000000;
+}
+
+.sl-text--16 {
+  font-family: Alibaba PuHuiTi 2.0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 1);
+}
+
+// 最大字体类型
+.sl-text--24 {
+  font-family: DIN;
+  font-size: 24px;
+  line-height: 26px;
+}
+
+.sl-text--typograbhy {
+  font-family: PingFang SC;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.8px;
+}
+
+// 文字颜色控制
+.sl-text--warning {
+  color: #ff834e;
+}
+
+.sl-text--blue {
+  color: #2d80ee;
+}
+
+.sl-text--orange {
+  color: #ff4d4f;
+}
+
+.sl-text--green {
+  color: #00b58a;
+}
+
+.sl-text--gray {
+  color: rgba(144, 144, 144, 1);
+}
+
+// 文字布局控制
+.sl-text--center {
+  text-align: center;
+}
+
+.sl-text--right {
+  text-align: right;
+}
+
+.sl-text--left {
+  text-align: left;
+}
+
+.sl-text--datatime {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+// 文字加粗
+.sl-text--bold {
+  font-weight: 700;
+}
+
+.sl-position--relative {
+  position: relative;
+}
+
+.sl-positions--absolute {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  // clip-path: polygon(13% 0, 54% 0, 100% 44%, 100% 88%);
+  clip-path: polygon(18% 0, 63% 0, 100% 46%, 100% 100%);
+}
+
+.sl-text--italic {
+  transform: rotate(53deg);
+  font-family: PingFang SC;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: right;
+  height: 40px;
+
+}
+
+// 这两个只有行高之间的区别
+// 第二就是颜色的区别。
+
+// 我是定义两个不同的类名呢？还是定义一个字体类名，然后设置两个不同颜色的字体类型？
+//
+
+
+// 清楚浏览器默认样式
