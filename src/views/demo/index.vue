@@ -3,11 +3,13 @@ import { reactive } from "vue";
 import Card from "@/components/Card/index.vue";
 import Test from "@/components/Test/index.vue";
 import about from "@/views/about/index.vue";
+import Button from "@/components/Button/Button.vue";
 </script>
 
 <template>
   <svg-icon name="user" />
   <svg-icon name="work" />
+  <Button type="primary">测试</Button>
   <!-- <p class="text-4xl">12312</p> -->
   <!-- <div class="demo-content px-[12px]">
     <img
