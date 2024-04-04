@@ -1,6 +1,7 @@
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
+// 过渡效果
 NProgress.configure({
   // 动画方式
   easing: "ease",

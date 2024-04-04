@@ -30,12 +30,7 @@ const styleExternalIcon = computed(() => {
 </script>
 
 <template>
-  <div
-    v-if="isExternalIcon"
-    :style="styleExternalIcon"
-    class="svg-external-icon svg-icon"
-    v-bind="$attrs"
-  />
+  <div v-if="isExternalIcon" :style="styleExternalIcon" class="svg-external-icon svg-icon" v-bind="$attrs" />
   <svg v-else :class="svgClass" aria-hidden="true" v-bind="$attrs">
     <use :xlink:href="iconName" />
   </svg>

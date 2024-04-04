@@ -1,15 +1,17 @@
-<script setup lang="ts">
-import { useDarkMode, useToggleDarkMode } from "@/hooks/useToggleDarkMode"
-import { ref } from "vue";
-import { useCachedViewStore } from "@/store/modules/cachedView";
+<script lang="ts" setup>
+import { defineComponent, defineProps, withDefaults } from "vue";
 
-const onClickRight = () => {
-  useToggleDarkMode();
-};
-const color = ref("green");
-// 获取屏幕边界到安全区域距离
-// const { safeAreaInsets } = uni.getSystemInfoSync()
+interface Item {
+  info?: string;
+  time?: string;
+  text?: string;
+  title?: string;
+  id?: number;
+}
 
+const props = defineProps<{
+  items: Item[];
+}>();
 </script>
 
 <template>
@@ -17,26 +19,27 @@ const color = ref("green");
     <div class="content">
       <div class="card-content sl-position--relative">
         <div class="shenpi sl-positions--absolute" :class="{
-          [`sl-background--${color}`]: color,
+          [`sl-background--${color}`]: color
         }">
-          <p class="sl-text--italic ">审批中</p>
+          <p class="sl-text--italic">审批中</p>
         </div>
         <div class="card">
-          <div class="card-title text-sm ">
+          <div class="card-title text-sm">
             <!-- <img src="" alt="" /> -->
-            <p>炉顶烟气挡板门机械指针指示错误</p>
+            <p>{{ title }}</p>
           </div>
           <div class="main-content sl-text--13">
-            <p>流程类型：重要会议任务工作流程</p>
-            <p>当前环节：<span class="sl-text--green">填写信息</span></p>
-            <div class="sl-text--datatime">2023-04-15 18:00:01</div>
+            <p>{{ text }}</p>
+            <p>
+              当前环节：<span class="sl-text--green">{{ info }}</span>
+            </p>
+            <div class="sl-text--datatime">{{ time }}</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <style scoped lang="less">
 .main-title-color {
   color: #d14328;

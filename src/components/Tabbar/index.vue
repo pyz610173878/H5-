@@ -7,6 +7,9 @@
       :to="item.to"
     >
       {{ item.title }}
+      <span>
+        <slot></slot>
+      </span>
     </van-tabbar-item>
   </van-tabbar>
 </template>
@@ -28,6 +31,30 @@ const tabbarData = reactive([
     title: "工作台",
     to: {
       name: "Tools"
+    }
+  },
+  {
+    icon: "user-o",
+    title: "我的",
+    to: {
+      name: "About"
+    }
+  }
+]);
+
+const tabbarDatas = reactive([
+  {
+    icon: "wap-home-o",
+    title: "质量检查",
+    to: {
+      name: "Check"
+    }
+  },
+  {
+    icon: "gem-o",
+    title: "质量活动",
+    to: {
+      name: "Active"
     }
   },
   {

@@ -3,6 +3,7 @@ import { getListApi, getListApiError } from "@/api/mock";
 import { reactive } from "vue";
 import { showFailToast, showSuccessToast } from "vant";
 import "vant/es/toast/style";
+import infoCard from "@/components/InfoCard/index.vue";
 
 const showList: string[] = reactive([]);
 
@@ -13,30 +14,38 @@ const handleSuccessReq = async () => {
 };
 const handleErrorReq = () => {
   getListApiError().then(
-    () => {},
+    () => { },
     err => {
       console.log(err);
       showFailToast("请求有误");
     }
   );
 };
+
+const props = reactive({
+  items: [
+    {
+      id: 1,
+      title: '炉顶烟气挡板门机械指针指示错误12311',
+      text: "流程类型：重要会议任务工作流程",
+      info: "填写信息123",
+      time: '2023-04-15 18:00:01',
+      accomplish: "已完成"
+    },
+    {
+      id: 2,
+      title: '炉顶烟气挡板门机械指针指示错误123',
+      text: "流程类型：重要会议任务工作流程3",
+      info: "填写信息123",
+      time: '2023-04-15 18:00:01',
+      accomplish: "已取消"
+    },
+  ],
+})
+
+
 </script>
 
 <template>
-  <div class="tools-content pt-[20px] px-[12px]">
-    <div class="pl-[12px] border-l-[3px] border-[color:#41b883] mb-[12px]">
-      <h3 class="font-bold text-[18px] my-[4px]">Mock</h3>
-    </div>
-    <van-space>
-      <van-button type="success" @click="handleSuccessReq">成功请求</van-button>
-      <van-button type="danger" @click="handleErrorReq">失败请求</van-button>
-    </van-space>
-    <div
-      class="text-[14px] py-[2px] px-[10px] rounded-[4px] bg-[var(--color-block-background)] mt-[14px]"
-    >
-      <p class="my-[14px] leading-[24px]">
-        {{ showList }}
-      </p>
-    </div>
-  </div>
+  <info-card :items="props.items" color="red" />
 </template>
