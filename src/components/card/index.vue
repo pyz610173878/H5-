@@ -18,9 +18,12 @@ const props = defineProps<{
   <div id="app">
     <div class="content">
       <div class="card-content sl-position--relative">
-        <div class="shenpi sl-positions--absolute" :class="{
-          [`sl-background--${color}`]: color
-        }">
+        <div
+          class="shenpi sl-positions--absolute"
+          :class="{
+            [`sl-background--${color}`]: color
+          }"
+        >
           <p class="sl-text--italic">审批中</p>
         </div>
         <div class="card">

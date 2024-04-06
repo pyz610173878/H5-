@@ -4,8 +4,5 @@ import todoList from "@/components/TodoList/index.vue";
 </script>
 
 <template>
-  <div class="app-wrapper px-3 pt-3">
-
-    123312
-  </div>
+  <div class="app-wrapper px-3 pt-3">123312</div>
 </template>

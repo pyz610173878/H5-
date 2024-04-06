@@ -21,10 +21,6 @@ const cachedViews = computed(() => {
           <component :is="Component" />
         </keep-alive>
       </router-view>
-      <!-- 路由页面跳转 -->
-      <!-- include 属性：这个属性是一个字符串数组，指定要缓存的组件名称。在这个例子中，只有名为 a 和 b 的组件会被缓存。
-        这意味着任何不在 a 和 b 之外的组件都不会被缓存。 -->
-        <!--  -->
       <tabbar />
     </van-config-provider>
   </div>

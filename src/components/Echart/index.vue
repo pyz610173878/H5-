@@ -2,7 +2,7 @@
   <div
     class="p-2 h-36 border-solid border-2 rounded-lg quality-control--container"
   >
-    <p class="font-normal text-base leading-4 h-5">
+    <p class="font-normal text-base text-black leading-4 h-5">
       {{ title }}
       <van-divider
         :style="{ color: '#F5F5F5', borderColor: '#F5F5F5', padding: '0 0' }"
@@ -34,7 +34,6 @@ use([
   TooltipComponent,
   LegendComponent
 ]);
-const title = ref("临近日期");
 // 这个复用程度还是不高
 const optionStlye = ref({
   fontSize: 14,
@@ -54,7 +53,7 @@ const option = ref({
     // 小方块 图例
     icon: "circle",
     orient: "vertical",
-    top: "25%",
+    top: "15%",
     align: "", // 设置文本水平居中
     // verticalAlign: 'middle', // 设置文本垂直居中
     // align: 'center',
@@ -111,7 +110,7 @@ const option = ref({
       type: "pie",
       radius: ["60%", "70%"], // 内半径和外半径：一个向内扩展，一个向外扩展
       avoidLabelOverlap: false,
-      center: ["20%", "60%"],
+      center: ["15%", "45%"],
       padAngle: 10,
       itemStyle: {
         borderRadius: 10 //圆角角度
@@ -155,6 +154,7 @@ const option = ref({
 const datas = ref(option.value.series[0].data);
 /* 计算测试数据总和 */
 const seriesSum = R.reduce((acc, item) => acc + item.value, 0, datas.value);
+const title = ref("临近日期");
 </script>
 
 <style scoped>

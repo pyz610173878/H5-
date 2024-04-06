@@ -3,7 +3,6 @@ import { useCachedViewStoreHook } from "@/store/modules/cachedView";
 import { computed } from "vue";
 import todoList from "@/components/TodoList/index.vue";
 // import Card from "@/components/Card/index.vue";
-
 </script>
 
 <template>
@@ -13,10 +12,7 @@ import todoList from "@/components/TodoList/index.vue";
           <component :is="Component" />
         </keep-alive>
       </router-view> -->
-    <todoList />
-
-
-
+  <todoList />
 </template>
 
 <style lang="less" scoped></style>

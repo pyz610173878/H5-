@@ -23,7 +23,7 @@ export default defineMock([
     body: {
       code: 1,
       message: "ERROR",
-      result: null
+      // result: null
     }
   }
 ]);

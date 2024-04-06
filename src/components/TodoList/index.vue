@@ -1,11 +1,22 @@
 <template>
   <van-config-provider>
-    <van-tabbar v-model="active" :placeholder="true" :route="true" class="sl-tabbar">
-      <van-tabbar-item v-for="(item, index) in tabbarDatas" :key="index" :to="item.to">
+    <van-tabbar
+      v-model="active"
+      :placeholder="true"
+      :route="true"
+      class="sl-tabbar"
+    >
+      <van-tabbar-item
+        v-for="(item, index) in tabbarDatas"
+        :key="index"
+        :to="item.to"
+      >
         <template #icon="">
           <img :src="item.icon" class="test1" />
         </template>
-        <span class=" text-slate-950 font-normal text-xs text-center">{{ item.title }}</span>
+        <span class="text-slate-950 font-normal text-xs text-center">{{
+          item.title
+        }}</span>
 
         <!-- 这里在添加一个图标方式 -->
         <span>
@@ -14,9 +25,6 @@
       </van-tabbar-item>
     </van-tabbar>
   </van-config-provider>
-
-
-
 </template>
 
 <!--肯定有更加便捷的加载方式，但是我现在不知道，天啊。 -->
@@ -69,7 +77,6 @@ const tabbarDatas = reactive([
   }
 ]);
 </script>
-
 
 <style scoped>
 .test1 {

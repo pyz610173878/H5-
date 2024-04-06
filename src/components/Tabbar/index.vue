@@ -1,11 +1,6 @@
 <template>
   <van-tabbar v-model="active" :placeholder="true" :route="true" fixed>
-    <van-tabbar-item
-      v-for="(item, index) in tabbarData"
-      :key="index"
-      :icon="item.icon"
-      :to="item.to"
-    >
+    <van-tabbar-item v-for="(item, index) in tabbarData" :key="index" :icon="item.icon" :to="item.to">
       {{ item.title }}
       <span>
         <slot></slot>
@@ -39,6 +34,20 @@ const tabbarData = reactive([
     to: {
       name: "About"
     }
+  },
+  {
+    icon: "user-o",
+    title: "我的1",
+    to: {
+      name: "Todo"
+    }
+  },
+  {
+    icon: "user-o",
+    title: "已完成",
+    to: {
+      name: "ToDone"
+    }
   }
 ]);
 
@@ -60,6 +69,13 @@ const tabbarDatas = reactive([
   {
     icon: "user-o",
     title: "我的",
+    to: {
+      name: "About"
+    }
+  },
+  {
+    icon: "user-o",
+    title: "",
     to: {
       name: "About"
     }

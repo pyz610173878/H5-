@@ -1,56 +1,16 @@
 <script lang="ts" setup>
+import type { PropType } from "vue";
 import { defineComponent, defineProps, withDefaults } from "vue";
-import { type CardProps } from "./types";
+import {
+  type CardType,
+  CardProp,
+  CardTypecolor
+} from "@/components/InfoCard/type";
 import { reactive } from "vue";
 
 const props = defineProps<{
-  items: CardProps[];
+  card_Data: CardProp[];
 }>();
-
-// const props = defineProps<CardProps>();
-
-console.log(props, "props123");
-
-
-
-const propos = reactive<CardProps>(
-  {
-    id: 1,
-    title: "炉顶烟气挡板门机械指针指示错误12311",
-    text: "流程类型：重要会议任务工作流程",
-    info: "填写信息123",
-    time: "2023-04-15 18:00:01",
-    accomplish: "已完成"
-  }
-);
-
-const test11 = reactive({
-  card: {
-    id: 1,
-    title: "炉顶烟气挡板门机械指针指示错误12311",
-    text: "流程类型：重要会议任务工作流程",
-    info: "填写信息123",
-    time: "2023-04-15 18:00:01",
-    accomplish: "已完成"
-  },
-})
-
-console.log(test11, "test11");
-console.log(propos, "propos");
-
-
-
-// console.log(props, "props");
-
-// 定义一个接口来描述状态到颜色的映射
-// interface StateColorMap {
-//   状态1: string;
-//   状态2: string;
-//   状态3: string;
-//   状态4: string;
-//   状态5: string;
-// }
-
 function getColor(
   stateToColorMap: { [state: string]: string } | undefined,
   state: string
@@ -66,35 +26,36 @@ const stateToColor: { [state: string]: string } = {
   待处理: "灰色",
   已完成: "蓝色"
 };
-
-const test22 = (x) => {
-  return x + 3;
-};
-// 感觉这样是多余的。因为传递过来的数据应该就是已经被处理好了的。我们直接在父组件中把处理好的数据传递过来就好了。
-// 而不是在子组件中再去处理一次。
-
 </script>
 <template>
   <div id="app">
-    <div class="content" v-for="(item, index) in props.items" :key="item.id">
-      <div class="card-content sl-position--relative">
-        <div class="shenpi sl-positions--absolute"
-          :class="{[`sl-background--${item.color}`]: item.color}"
+    <div
+      class="content"
+      v-for="(item, index) in props.card_Data"
+      :key="item.id"
+    >
+      <div class="card-content  sl-position--relative">
+        <div
+          class="shenpi sl-positions--absolute"
+          :class="{ [`sl-background--${item.color}`]: item.color }"
         >
-          <!-- :class="{[`sl-background--${getColor(stateToColor,item.accomplish)}`]: color}" -->
           <p class="sl-text--italic">{{ item.accomplish }}</p>
         </div>
         <div class="card">
-          <div class="card-title text-sm">
-            <!-- <img src="" alt="" /> -->
-            <p>{{ item.title }}</p>
+          <div class="absolute sl-icon--circle">
+            <van-icon name="circle" />
+            <span class="relative sl-icon--text">1</span>
+          </div>
+
+          <div class="card-title">
+            <p class="">{{ item.title }}</p>
           </div>
           <div class="main-content sl-text--13">
             <p>{{ item.text }}</p>
             <p>
               当前环节：<span class="sl-text--green">{{ item.info }}</span>
             </p>
-            <div class="sl-text--datatime">{{ item.time }}</div>
+            <div class="sl-text--datatime float-right">{{ item.time }}</div>
           </div>
         </div>
       </div>
@@ -141,10 +102,22 @@ const test22 = (x) => {
 .sl-background--blue {
   background: #00b58a;
 }
+
 .sl-background--red {
   background: #f56c6c;
 }
+
 .sl-background--gray {
   background: #909399;
+}
+
+.sl-icon--circle {
+  left: 15px;
+  top: 8px;
+}
+.sl-icon--text {
+  right: 9px;
+  font-size: 8px;
+  top: -2px;
 }
 </style>
