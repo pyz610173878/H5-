@@ -1,12 +1,20 @@
 <script setup lang="ts" name="Tools">
 import { getListApi, getListApiError } from "@/api/mock";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { showFailToast, showSuccessToast } from "vant";
 import "vant/es/toast/style";
 import infoCard from "@/components/InfoCard/index.vue";
 import Tabbar from "@/components/Tabbar/index.vue";
+import {categoryHook} from "@/hooks/usedemo";
+import {GetInfoCard} from "@/hooks/useCardInfo";
+import { onMounted,onBeforeMount } from "vue";
+import {type InfoData} from "@/hooks/usedemo";
 
 const showList: string[] = reactive([]);
+
+const {infoData, test1,handlerGetCategory} = categoryHook();
+const {Datas,handlerGetTodoList} = GetInfoCard();
+
 
 const handleSuccessReq = async () => {
   const { list } = await getListApi();
@@ -44,21 +52,109 @@ const props = reactive({
   ]
 });
 const onClickLeft = () => history.back();
+const active = ref("待办");
+const number1 = ref(0);
+
+
+const handler_Data = () => {
+  return number1.value++
+}
+// const test1 = ref('')
+const notice = reactive({
+  "待办": '对应接口数据',
+  "待阅": '对应接口数据',
+  "已办": '对应接口数据',
+  "已阅": '对应接口数据',
+  "申请": '对应接口数据'
+})
+
+
+// interface CategoryOption {
+//   category_name: string;
+//   children?: string;
+//   id: number;
+//   parent_id: null;
+// }
+
+// interface InfoData {
+//   category_options: CategoryOption[];
+// }
+
+// /** 自定义hook */
+// const infoData: InfoData = reactive({
+//   category_options: [
+//     {
+//       category_name: '123',
+//       children: "string",
+//       id: 123,
+//       parent_id: null
+//     }
+//   ],
+// });
+
+
+// console.log(ggboy,123312);
+
+
+const infoDatas: InfoData = ref({
+    category_options: [{
+      category_name: '123',
+      children: "string",
+      id: 1123123111,
+      parent_id: null
+    }],
+  });
+
+  const infoDataes: InfoData = reactive({
+    category_options: [{
+      category_name: '123',
+      children: "string",
+      id: 1123123111,
+      parent_id: null
+    }],
+  });
+
+
+  console.log(infoDatas.value.category_options, 'infoData123');
+  console.log(infoDataes.category_options, 'infoData');
+const onChange = (status: string) => {
+  console.log(status.name, 'status');
+
+  number1.value = notice[status.name] || '未知状态';
+};
+// 下一步呢？
+
+onMounted(() => {
+
+
+  // handleSuccessReq();
+  // handleErrorReq();
+});
+
+onBeforeMount(() => {
+  const {infoData} = categoryHook();
+  const {gg2} = GetInfoCard();
+  handlerGetCategory();
+  handlerGetTodoList();
+
+})
 </script>
-
 <template>
-  <van-tabs v-model:active="active">
-  <van-tab title="待办" to="todo">内容 1</van-tab>
-  <van-tab title="待阅" to="toread">内容 2</van-tab>
-  <van-tab title="已办" t0="todone">内容 3</van-tab>
-  <van-tab title="已阅" to="read">内容 4</van-tab>
-  <van-tab title="申请" to="applyfor">内容 4</van-tab>
-</van-tabs>
+  {{test1 }}
 
-  
+  {{ infoDatas  }}
+  <van-tabs v-model:active="active" @click-tab="onChange">
+    <van-tab title="待办" name="待办">
+      <infoCard :card_Data="Datas.card_Data" />
 
+    </van-tab>
+    <van-tab title="待阅" name="接口地址"></van-tab>
+    <van-tab title="已办" name="已办"></van-tab>
+    <van-tab title="已阅" name="已阅"></van-tab>
+    <van-tab title="申请" name="申请"></van-tab>
+  </van-tabs>
   <!-- <Tabbar/>  -->
-  <!-- 页面不能同时渲染两个 tabbar -->y
+  <!-- 页面不能同时渲染两个 tabbar -->
   <!-- <van-grid clickable :column-num="5">
     <van-grid-item  text="路由跳转" to="/read" />
     <van-grid-item text="URL 跳转" to="/todo" />

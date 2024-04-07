@@ -1,4 +1,5 @@
 import { reactive } from "vue";
+// api 地址
 export type CardType =
   | "accomplish"
   | "cancel"
@@ -55,3 +56,5 @@ export interface CardProp {
 // }
 
 // 定义的类型可以是一个类或者是构造函数
+
+// 假设写在这里，我的状态是不知道的。先别想着抽离。

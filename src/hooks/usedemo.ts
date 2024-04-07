@@ -1,32 +1,47 @@
-import { reactive } from "vue";
-import { GetCategory } from "../api/info";
+import { reactive, ref } from "vue";
+// import { GetCategory } from "../api/info";
 
-interface CategoryOption {
+export interface CategoryOption {
   category_name: string;
   children?: string;
   id: number;
   parent_id: null;
 }
 
-interface InfoData {
+
+
+export interface InfoData {
   category_options: CategoryOption[];
+}
+
+const response = {
+  data: [{
+    id: 1,
+    title: "炉顶烟气挡板门机械指针指示错误12311",
+    text: "流程类型：重要会议任务工作流程",
+    info: "填写信息123",
+    time: "2023-04-15 18:00:01",
+    accomplish: "已完成"
+  }]
 }
 
 /** 自定义hook */
 export const categoryHook = () => {
-  const infoData: InfoData = reactive({
+  const infoData: InfoData = ref({
     category_options: [],
   });
-
+  // 还是要在熟悉一下 ref. reactive的区别
   /** 获取分类 */
   const handlerGetCategory = () => {
-    return GetCategory().then((response) => {
-      infoData.category_options = response.data;
-      console.log(response.data, "分类数据");
-      
-      console.log(infoData.category_options, "分类名称");
-    });
+    console.log(123);
+    infoData.value.category_options = response.data;
+    console.log(infoData.value.category_options, "分类数据");
+
   };
+
+  // 函数指责单一，一个函数只做一件事情。
+  // 我有五个接口请求，我就写五个函数，不要写一个函数，然后在函数里面写五个请求。
+
 
   return {
     infoData,

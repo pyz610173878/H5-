@@ -2,12 +2,8 @@
   <div
     class="p-2 h-36 border-solid border-2 rounded-lg quality-control--container"
   >
-    <p class="font-normal text-base text-black leading-4 h-5">
+    <p class="van-hairline--bottom font-normal text-base text-black leading-4 h-5">
       {{ title }}
-      <van-divider
-        :style="{ color: '#F5F5F5', borderColor: '#F5F5F5', padding: '0 0' }"
-      >
-      </van-divider>
     </p>
     <div class="h-28 quality-control--chart mb-7">
       <v-chart class="" :option="option" autoresize />

@@ -2,20 +2,21 @@
 import { reactive, ref, onMounted } from "vue";
 // import about from "@/views/about/index.vue";
 // import Button from "@/components/Button/Button.vue";
-// import ECharts from "@/components/Echart/index.vue";
+import ECharts from "@/components/Echart/index.vue";
 // import tabbar from "@/components/Tabbar/index.vue";
 // import todoList from "@/components/TodoList/index.vue";
 // import active from "@/views/quality/check/index.vue";
 // import { useCachedViewStoreHook } from "@/store/modules/cachedView";
-// import Todoview from "@/components/Todoview/index.vue";
+import Todoview from "@/components/Todoview/index.vue";
 // import slcard from "@/components/sl-card/index.vue";
 // import { computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useInfoCard, useMouse } from "@/hooks/useCardInfo";
 import Notice from "@/components/Notice/index.vue";
 // const { gg2,Data } = useInfoCard();
 
 // console.log(Data, 123123123);
+
+const button_search = ref("搜索");
 
 // const propss: CardProp = reactive({
 //   card_Data: [{
@@ -99,16 +100,26 @@ const test1 = () => {
 // 但是我现在的问题是，我应该怎么定义这个hooks呢？
 
 onMounted(() => {
-  const { gg2, Data } = useInfoCard();
 });
 const value = ref("");
 </script>
 
 <template>
   <!-- 可以使用 CellGroup 作为容器 -->
-  <van-cell-group inset>
-    <van-field v-model="value" label="文本" placeholder="请输入用户名" />
-  </van-cell-group>
+  <van-cell-group inset >
+    <van-field
+    class="sl-field--content"
+    left-icon="search"
+    :border="true"
+    v-model="value" placeholder="请输入问题描述" >
+    <template #button>
+      <button>搜索</button>
+    </template>
+      
+      <!-- <van-button round type="primary">{{ button_search }}</van-button> -->
+  </van-field>
+  </van-cell-group >
+
 
   <!-- {{ test13 }}
   <button @click="test4">{{ test13 }}</button>
@@ -118,7 +129,7 @@ const value = ref("");
   <svg-icon name="work" /> -->
   <!-- <img :src="ggg"> -->
   <!-- <a :href="ggg">百度一下</a> -->
-  <!-- <Echart></Echart> -->
+  <Echart></Echart>
   <!-- <Notice :notice_data="Data.Notice_Data" /> -->
   <!-- <Notice v-bind="Data.Notice_Data"/> -->
   <div class="mt-6">
@@ -207,5 +218,15 @@ const value = ref("");
 <style scoped>
 .content {
   padding: 10px 15px;
+}
+
+.van-cell ::v-deep.sl-field--content {
+  background-color: wheat;
+  border-radius: 50px;
+  height: 32px;
+}
+
+.van-field ::v-deep.sl-field--content .van-field__left-icon {
+  margin-left: 10px;
 }
 </style>
