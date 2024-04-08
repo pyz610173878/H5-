@@ -1,20 +1,28 @@
 import Layout from "@/layout/index.vue";
 import type { RouteRecordRaw } from "vue-router";
-import Demo from "@/views/demo/index.vue";
+import HomePage from "@/views/HomePage/index.vue";
 import TodoList from "@/components/TodoList/index.vue";
 import Todoview from "@/components/Todoview/index.vue";
 import shenpi from "@/views/shenpi/index.vue";
+import planning from "@/views/QualityControl/planning/index.vue";
+import control from "@/views/control/index.vue";
+import check from "@/views/check/index.vue";
+import statistics from "@/views/statistics/index.vue";
+import active from "@/views/active/index.vue";
+import equipment from "@/views/equipment/index.vue";
+import approvalList from "@/views/ApprovalList/index.vue";
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "root",
     component: Layout,
-    redirect: { name: "Demo" },
+    redirect: { name: "HomePage" },
     children: [
       {
-        path: "demo",
-        name: "Demo",
-        component: Demo,
+        path: "homepage",
+        name: "HomePage",
+        component: HomePage,
         meta: {
           title: "主页"
         }
@@ -83,7 +91,7 @@ const routes: Array<RouteRecordRaw> = [
           title: "待办"
         }
       }
-    ],
+    ]
     // 先不搞,因为如果后面后端返回的路由是动态的,这里就不好处理了
   },
   // {
@@ -141,6 +149,46 @@ const routes: Array<RouteRecordRaw> = [
         }
       }
     ]
+  },
+  {
+    path: "/planning",
+    name: "Planning",
+    component: planning
+  },
+  {
+    path: "/control",
+    name: "Control",
+    component: control
+  },
+  {
+    path: "/active",
+    name: "Active",
+    component: active
+  },
+  {
+    path: "/check",
+    name: "Check",
+    component: check
+  },
+  {
+    path: "/statistics",
+    name: "Statistics",
+    component: statistics
+  },
+  {
+    path: "/equipment",
+    name: "Equipment",
+    component: equipment
+  },
+  {
+    path: "/approvalList",
+    name: "ApprovalList",
+    component: approvalList
+  },
+  {
+    path: "/tasklist",
+    name: "TaskList",
+    component: () => import("@/views/TaskList/index.vue"),
   }
 ];
 

@@ -12,7 +12,7 @@ const props = defineProps<{
     <div
       v-for="(item, index) in props.notice_data"
       :key="item.id"
-      class="content mb-4 rounded-xl sl-position--relative"
+      class="p-4 mb-2 bg-slate-100 content rounded-xl sl-position--relative"
     >
       <div class="notice sl-positions--absolute">
         <!-- 主题部分 -->
@@ -41,7 +41,11 @@ const props = defineProps<{
   height: 67px;
 }
 .height {
-  height: 4.8vw;
-  line-height: 4.1vw;
+  height: 30px;
+  line-height:17px;
+}
+
+#app {
+  
 }
 </style>

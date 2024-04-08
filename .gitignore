@@ -29,3 +29,6 @@ coverage
 *.sw?
 
 /src/typings/components.d.ts
+
+docs
+docs/

@@ -13,8 +13,8 @@ type ListResult = {
  */
 export function GetTodoList(data?: object): Promise<ListResult> {
   return http.request({
-    url: "/list/error",
-    method: "get",
+    url: "/todoTask",
+    method: "post",
     data
   });
 }
@@ -65,6 +65,14 @@ export function GetReadoneList(data?: object): Promise<ListResult> {
  */
 
 export function GetApplicationList(data?: object): Promise<ListResult> {
+  return http.request({
+    url: "/list/error",
+    method: "get",
+    data
+  });
+}
+
+export function GetNoticeList(data?: object): Promise<ListResult> {
   return http.request({
     url: "/list/error",
     method: "get",
