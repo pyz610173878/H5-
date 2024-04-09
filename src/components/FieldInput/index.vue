@@ -3,13 +3,22 @@ import { ref } from "vue";
 import Button from "@/components/Button/Button.vue";
 import { reactive } from "vue";
 
-const Notice_Data = reactive({
-  question_data: ""
+
+interface Notice_Data {
+  question_data: string;
+  TaskList_data: number;
+  text?:string;
+}
+
+const Notice_Datas:Notice_Data = reactive({
+  question_data: "",
+  TaskList_data: 0,
+  text:'共有条待办数据'
 });
 
 const onSubmit = (values) => {
       console.log('submit', values);
-      console.log('submit', Notice_Data.question_data);
+      console.log('submit', Notice_Datas.question_data);
       
     };
 </script>
@@ -21,7 +30,7 @@ const onSubmit = (values) => {
       <van-cell-group inset>
         <van-field
           center
-          v-model="Notice_Data.question_data"
+          v-model="Notice_Datas.question_data"
           class="sl-field--content"
           left-icon="search"
           :border="true"
@@ -33,7 +42,7 @@ const onSubmit = (values) => {
         </van-field>
         <div class="mt-2 mb-2">
         <p class="text-center">
-          <span>共有{{}}条待办任务</span>
+          <span>{{`共有${}条待办数据`}}</span>
         </p>
       </div>
       </van-cell-group>
