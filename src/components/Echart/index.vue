@@ -1,8 +1,10 @@
 <template>
   <div
-    class="p-2  h-36 border-solid border-2 rounded-lg quality-control--container"
+    class="bg-white p-2 h-36 border-solid border-2 rounded-lg quality-control--container"
   >
-    <p class="van-hairline--bottom font-normal text-base text-black leading-4 h-5">
+    <p
+      class="van-hairline--bottom font-normal text-base text-black leading-4 h-5"
+    >
       {{ title }}
     </p>
     <div class="h-28 quality-control--chart mb-7">
@@ -11,7 +13,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { PieChart } from "echarts/charts";
@@ -31,6 +33,9 @@ use([
   LegendComponent
 ]);
 // 这个复用程度还是不高
+
+// 已弃用：自 4.0 以来，labelLine 中的“正常”层次结构已被删除。
+// 现在，所有样式属性都直接在 labelLine 中配置
 const optionStlye = ref({
   fontSize: 14,
   color: "#202325",
@@ -125,19 +130,12 @@ const option = ref({
       },
       labelLine: {
         show: false,
-        normal: {
-          // formatter: '{b}', // 显示数据项的名称
-          rich: {
-            name: {
-              color: "#fff",
-              fontSize: 10, // 设置字体大小
-              lineHeight: 22, // 设置行高
-              backgroundColor: "#333", // 设置背景颜色
-              borderRadius: 4, // 设置圆角
-              padding: [3, 4] // 设置内边距
-            }
-          }
-        }
+        color: "#fff",
+        fontSize: 10, // 设置字体大小
+        lineHeight: 22, // 设置行高
+        backgroundColor: "#333", // 设置背景颜色
+        borderRadius: 4, // 设置圆角
+        padding: [3, 4] // 设置内边距
       },
       data: [
         { value: 73, name: "未临日期", itemStyle: { color: "#1677ff" } },
@@ -152,6 +150,9 @@ const datas = ref(option.value.series[0].data);
 const seriesSum = R.reduce((acc, item) => acc + item.value, 0, datas.value);
 const title = ref("临近日期");
 </script>
+
+<!-- 无法获取 DOM 宽度或高度。 -->
+<!-- 请检查 dom.clientWidth 和 dom.clientHeight。它们不应为 0。例如，您可能需要在 window.onload 的回调中调用它 -->
 
 <style scoped>
 .chart {

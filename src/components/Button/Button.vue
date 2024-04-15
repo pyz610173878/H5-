@@ -9,12 +9,24 @@
     <span class="sl-button--text">
       <slot />
     </span>
+
+  
+      <div class="h-20 w-40">
+      <slot>
+      </slot>
+
+      <slot name="slot1"></slot>
+
+      <slot name="slot2" msg="hello world"></slot>
+    
+  </div>
+    
   </button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Button } from 'vant';
+import { Button } from "vant";
 export default defineComponent({
   name: "sl-button"
 });
@@ -31,27 +43,24 @@ const size = reactive({
 </script>
 
 <script setup lang="ts">
-
 import { reactive, ref } from "vue";
 import type { ButtonProps } from "./types";
 
 defineProps<ButtonProps>();
-
 </script>
-
 
 <style>
 .sl-button {
   border-radius: 50px;
-  background-color:#2D80EE;
+  background-color: #2d80ee;
   width: 50px;
   margin-right: 5px;
 }
 
 .sl-button--text {
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 400px;
   font-size: 12px;
-  line-height: 16.8px
+  line-height: 16.8px;
 }
 </style>

@@ -1,3 +1,11 @@
+/*
+ * @Author: hacker 610173878@qq.com
+ * @Date: 2024-03-22 15:52:02
+ * @LastEditors: hacker 610173878@qq.com
+ * @LastEditTime: 2024-04-12 08:18:42
+ * @FilePath: \H5-\src\utils\http\index.ts
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import Axios, {
   type AxiosInstance,
   type AxiosError,
@@ -8,6 +16,12 @@ import { ContentTypeEnum, ResultEnum } from "@/enums/requestEnum";
 import NProgress from "../progress";
 import { showFailToast } from "vant";
 import "vant/es/toast/style";
+import { store } from "@/store/index";
+import { useCachedViewStore } from "@/store/modules/cachedView";
+// const token = '1191D540300D8C0F854AC41E2DF7ED67'; //测试Token
+
+// 在TS 文件中使用 Pinia
+const axiosBase = useCachedViewStore(store);
 
 // 默认 axios 实例请求配置
 const configDefault = {
@@ -31,9 +45,10 @@ class Http {
       config => {
         NProgress.start();
         // 发送请求前，可在此携带 token
-        // if (token) {
-        //   config.headers['token'] = token
-        // }
+        if (axiosBase.User_info.qywxToken) {
+          config.headers["wx-user-Token"] = axiosBase.User_info.qywxToken;
+          console.log("config", config.headers);
+        }
         return config;
       },
       (error: AxiosError) => {
@@ -49,18 +64,23 @@ class Http {
       (response: AxiosResponse) => {
         NProgress.done();
         // 与后端协定的返回字段
-        const { code, message, result } = response.data;
+        // const { code, message, result } = response.data;
+        const { success, errCode, errMessage } = response.data;
         // 判断请求是否成功
-        const isSuccess =
-          result &&
-          Reflect.has(response.data, "code") &&
-          code === ResultEnum.SUCCESS;
-        if (isSuccess) {
-          return result;
-        } else {
+        if (success) {
+          return response.data;
+        }
+        // const isSuccess =
+        //   result &&
+        //   Reflect.has(response.data, "code") &&
+        //   code === ResultEnum.SUCCESS;
+        // if (isSuccess) {
+        //   return result;
+        // }
+        else {
           // 处理请求错误
-          // showFailToast(message);
-          return Promise.reject(response.data);
+          showFailToast(errMessage);
+          return Promise.reject(errMessage);
         }
       },
       (error: AxiosError) => {

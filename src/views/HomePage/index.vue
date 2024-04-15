@@ -1,31 +1,24 @@
-<script setup lang="ts" name="Demo">
-import { reactive, ref, onMounted, computed } from "vue";
-// import about from "@/views/about/index.vue";
-// import Button from "@/components/Button/Button.vue";
-import ECharts from "@/components/Echart/index.vue";
-// import tabbar from "@/components/Tabbar/index.vue";
-// import todoList from "@/components/TodoList/index.vue";
-// import active from "@/views/quality/check/index.vue";
-// import { useCachedViewStoreHook } from "@/store/modules/cachedView";
-import Todoview from "@/components/Todoview/index.vue";
-
+<script setup lang="ts" name="HomePage">
+import {
+  reactive,
+  ref,
+  onMounted,
+  computed,
+  onBeforeMount,
+  getCurrentInstance
+} from "vue";
 import { useRouter, useRoute } from "vue-router";
+import Todoview from "@/components/Todoview/index.vue";
+import { getCode } from "@/utils/validate";
+import { getUserCode } from "@/api/UserInfo";
+import { useCachedViewStore } from "@/store/modules/cachedView";
+import { getDatail, getDoneTask } from "@/api/UserInfo";
 import Notice from "@/components/Notice/index.vue";
 import { GetNoticeInfo } from "@/hooks/useNoticeinfo";
+const { Data, handlerGetNoticeList } = GetNoticeInfo(); // 获取通知公告数据
 
-const { Data, handlerGetNoticeList } = GetNoticeInfo();
-
-// 路由实例和当前路由信息
-const router = useRouter();
-const route = useRoute(); //当前页面的路由信息比如 name path query等
-
-const test1 = () => {
-  router.push({ name: "approvalList" });
-};
-const value1 = ref(1);
-const double = computed<number>(() => {
-  return value1.value * 2;
-});
+const store = useCachedViewStore();
+//
 const TabbarDatas = reactive([
   {
     icon: `/src/assets/Photos/planning.png`,
@@ -39,114 +32,146 @@ const TabbarDatas = reactive([
     title: "质量控制",
     to: {
       name: "Tools"
-    }
+    },
+    names: "质量控制"
   },
   {
     icon: "/src/assets/Photos/active.png",
     title: "质量活动",
     to: {
       name: "Tools"
-    }
+    },
+    names: "质量活动"
   },
   {
     icon: "/src/assets/Photos/check.png",
     title: "质量检查",
     to: {
       name: "Tools"
-    }
+    },
+    names: "质量检查"
   },
   {
     icon: "/src/assets/Photos/statistics.png",
     title: "特种统计",
     to: {
       name: "Tools"
-    }
+    },
+    names: "质量统计"
   },
   {
     icon: "/src/assets/Photos/equipment.png",
     title: "特种设备",
     to: {
       name: "Tools"
-    }
+    },
+    names: "特种设备管理"
   }
 ]);
+
+//
+const Datass = ref({
+  Examine_Data: [
+    { total: 5, type: ["待办", "待阅", "任务", "提醒"], name: "待办" },
+    { total: 6, type: ["待办", "待阅", "任务", "提醒"], name: "待阅" }
+  ]
+});
+//
+const Datas = ref({
+  Examine_Data: [{ total: 7, type: ["任务"], name: "任务管理" }]
+});
+//
+const Dataes = ref({
+  Examine_Data: [{ total: 10, type: ["提醒"], name: "提醒" }]
+});
+
 const HomePage = reactive({
   notice: "通知公告"
 });
 
-onMounted(() => {
+// 跳转name值
+
+const DataRef = ref([
+  "质量策划",
+  "质量控制",
+  "质量活动",
+  "质量检查",
+  "质量统计",
+  "特种设备管理"
+]);
+
+onBeforeMount(() => {
+  //   // 在这里执行挂载前的操作
+  const store = useCachedViewStore();
   const { Data } = GetNoticeInfo();
   handlerGetNoticeList();
+  // const codes = window.location.href;
+  // store.Code = getCode(codes);
 });
 
+onMounted(() => {
+  // const { Data } = GetNoticeInfo();
+  // handlerGetNoticeList();
+  // const result = getCode(code);
+  // const store = useCachedViewStore();
+  // store.Token = result;
+});
 </script>
 
 <template>
   <div class="">
     <Echart></Echart>
-    <div class="mb-8"></div>
+    <!-- 1. 固定定位是一直不动-->
+    <div class="mb-6"></div>
     <div>
-      <Todoview :tabbarDatas="TabbarDatas"/>
+      <Todoview :tabbarDatas="TabbarDatas" />
+    </div>
+    <div class="mt-6">
+      <!-- 待办列表 -->
+
+      <div class="w-44 inline-block">
+        <ExamineDisplay :Examine_Data="Datass.Examine_Data" :column-num="2" />
+      </div>
+
+      <div class="w-87 inline-block">
+        <ExamineDisplay
+          :Examine_Data="Datas.Examine_Data"
+          :column-num="1"
+          :to="'/tasklist'"
+        />
+      </div>
+
+      <div class="w-87 inline-block">
+        <ExamineDisplay
+          :Examine_Data="Dataes.Examine_Data"
+          :column-num="1"
+          :to="'/myreminder'"
+        />
+      </div>
     </div>
 
-    <!-- 我觉得是绝对定位的原因 -->
+    <p class="mt-6 text-sm font-normal text-black">
+      {{ HomePage.notice }}
+    </p>
 
-    <div class="mt-6 rounded-xl border-solid">
-      <van-grid :border="false" :column-num="4">
-        <van-grid-item to="/approvalList" text="文字">
-          <div>
-            <p class="text-center text-center text-2xl leading-7 text-center font-bold text-black">
-              3
-            </p>
-            <p>待办</p>
-          </div>
-        </van-grid-item>
-        <van-grid-item to="/approvalList">
-          <div>
-            <p class="text-center text-2xl leading-7 text-center font-bold text-black">
-              3
-            </p>
-            <p>待阅</p>
-          </div>
-        </van-grid-item>
-        <van-grid-item>
-          <div>
-            <p class="text-center text-center text-2xl leading-7 text-center font-bold text-black">
-              3
-            </p>
-            <p>任务</p>
-          </div>
-        </van-grid-item>
-        <van-grid-item>
-          <div>
-            <p class="text-center text-center text-2xl leading-7 text-center font-bold text-black">
-              3
-            </p>
-            <p>提醒</p>
-          </div>
-        </van-grid-item>
-      </van-grid>
-    </div>
-
-    <p class="mt-6 mb-2">{{ HomePage.notice }}</p>
     <div>
-      <Notice :notice_data="Data.Notice_Data" />
+      <Notice :notice_data="Data.Notice_Data">
+      </Notice>
     </div>
   </div>
 </template>
 
 <style scoped>
-.content {
-  padding: 10px 15px;
-}
-
 .van-cell ::v-deep.sl-field--content {
-  background-color: wheat;
   border-radius: 50px;
   height: 32px;
 }
 
 .van-field ::v-deep.sl-field--content .van-field__left-icon {
   margin-left: 10px;
+}
+
+.w-87 {
+  width: 87px;
 }
 </style>

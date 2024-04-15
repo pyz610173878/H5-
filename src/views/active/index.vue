@@ -6,6 +6,5 @@ import todoList from "@/components/TodoList/index.vue";
 <template>
   <div class="app-wrapper px-3 pt-3">
     <h1>Active</h1>
-
   </div>
 </template>

@@ -22,7 +22,7 @@ export default defineMock([
     delay: 1000,
     body: {
       code: 1,
-      message: "ERROR",
+      message: "ERROR"
       // result: null
     }
   }

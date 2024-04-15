@@ -7,3 +7,9 @@
 export function isExternal(path: string) {
   return /^(https?:|mailto:|tel:)/.test(path);
 }
+
+export function getCode(herf: string) {
+  const regex = /code=([^&]*)/;
+  const match = herf.match(regex);
+  return match[1];
+}

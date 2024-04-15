@@ -3,7 +3,7 @@ import { http } from "@/utils/http";
 type ListResult = {
   code: number;
   message: string;
-  list: Array<any>;
+  data: Array<any>;
 };
 
 /**
@@ -11,9 +11,9 @@ type ListResult = {
  * @param data
  * @returns
  */
-export function GetTodoList(data?: object): Promise<ListResult> {
+export function GetTodoTask(data?: number): Promise<ListResult> {
   return http.request({
-    url: "/todoTask",
+    url: "/hpcc-tms/v1_0/module/workflow-v1/todoTask",
     method: "post",
     data
   });

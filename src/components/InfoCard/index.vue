@@ -1,61 +1,83 @@
 <script lang="ts" setup>
 import type { PropType } from "vue";
 import { defineComponent, defineProps, withDefaults } from "vue";
-import {
-  type CardType,
-  CardProp,
-  CardTypecolor
-} from "@/components/InfoCard/type";
+import { type CardProp, CardTypecolor } from "@/components/InfoCard/type";
 import { reactive } from "vue";
 
 const props = defineProps<{
   card_Data: CardProp[];
 }>();
-function getColor(
-  stateToColorMap: { [state: string]: string } | undefined,
-  state: string
-): string {
-  // 检查状态映射是否存在，如果存在，返回对应的颜色
-  return stateToColorMap?.[state] || "默认颜色";
-}
-// 定义一个状态到颜色的映射
-const stateToColor: { [state: string]: string } = {
-  已取消: "红色",
-  审批中: "绿色",
-  已撤回: "蓝色",
-  待处理: "灰色",
-  已完成: "蓝色"
+
+const handerStringInArray = (str: string) => {
+  const arr = ["COMMIT", "REVOKE", "START", "SUSPEND", "ACTIVE", "BACK"];
+  const a = "已审批";
+  const b = "审批中";
+  const result = arr.includes(str);
+  if (result === true) {
+    return a;
+  } else {
+    return b;
+  }
 };
+
+const test1 = () => {
+//   跳转页面是相同的。
+//   只是每次加载的数据不一样。
+}
 </script>
 <template>
-  <div id="app">
+  <div id="app" @click="test1">
+    
     <div
-      class="content"
+      class="p-4"
       v-for="(item, index) in props.card_Data"
-      :key="item.id"
+      :key="item.number"
     >
-      <div class="card-content  sl-position--relative">
+      <div class="card-content rounded-xl h-20 sl-position--relative">
         <div
-          class="shenpi sl-positions--absolute"
+          class="w-12 h-12 sl-positions--absolute"
           :class="{ [`sl-background--${item.color}`]: item.color }"
         >
-          <p class="sl-text--italic">{{ item.accomplish }}</p>
+          <p
+            class="sl-text--italic text-white"
+            :class="
+              handerStringInArray(item.processInstanceStatus) === '已审批'
+                ? 'sl-icon--grey'
+                : 'sl-notice--type-blue'
+            "
+          >
+            {{ handerStringInArray(item.processInstanceStatus) }}
+          
+          </p>
         </div>
-        <div class="card">
+        <div class="pl-6">
           <div class="absolute sl-icon--circle">
-            <van-icon name="circle" />
-            <span class="relative sl-icon--text">1</span>
+            <van-icon
+              name="circle"
+              :class="
+                handerStringInArray(item.processInstanceStatus) === '已审批'
+                  ? 'sl-icon--grey'
+                  : 'sl-notice--type-blue'
+              "
+            />
+            <!-- 圆圈未解决 -->
+            <span class="relative sl-icon--text">{{ index }}</span>
           </div>
 
-          <div class="card-title">
-            <p class="">{{ item.title }}</p>
+          <div class="mb-1">
+            <p class="">{{ item.processDefinitionName }}</p>
           </div>
           <div class="main-content sl-text--13">
-            <p>{{ item.text }}</p>
-            <p>
-              当前环节：<span class="sl-text--green">{{ item.info }}</span>
-            </p>
-            <div class="sl-text--datatime float-right">{{ item.time }}</div>
+            <p>流程类型：{{ item.processInstanceTitle }}</p>
+            <!-- <p>
+              <span class="sl-text--green">
+                <br>
+                {{item.processInstanceStatusStr}}
+              </span>
+            </p> -->
+            <div class="sl-text--datatime float-right mt-2">
+              {{ item.createTime }}
+            </div>
           </div>
         </div>
       </div>
@@ -64,39 +86,16 @@ const stateToColor: { [state: string]: string } = {
 </template>
 
 <style>
-.main-title-color {
-  color: #d14328;
-}
-
-.content {
-  padding: 15px 15px;
-  box-shadow: 0px 1px 8px 2px rgba(20, 20, 20, 0.08);
-  background: rgba(255, 255, 255, 1);
-}
-
 .card-content {
-  height: 92px;
-  background-color: wheat;
-  border-radius: 10px;
+  /* height: 85px; */
+  /* border-radius: 10px; */
   padding: 8px 16px 8px 16px;
-  opacity: 0px;
-}
-
-.card {
-  padding-left: 25px;
-}
-
-.card-title {
-  margin-bottom: 5px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 1px 8px 2px rgba(20, 20, 20, 0.08);
 }
 
 .sl-background--green {
   background: #00b58a;
-}
-
-.shenpi {
-  width: 48px;
-  height: 48px;
 }
 
 .sl-background--blue {
@@ -119,5 +118,17 @@ const stateToColor: { [state: string]: string } = {
   right: 9px;
   font-size: 8px;
   top: -2px;
+}
+
+#app {
+  background-color: rgba(246, 246, 246, 1);
+}
+
+.sl-icon--grey {
+  background-color: rgba(0, 181, 138, 1);
+}
+
+.sl-icon--blue {
+  background-color: rgba(45, 128, 238, 1);
 }
 </style>

@@ -1,11 +1,25 @@
+import { number } from "echarts";
 import { reactive } from "vue";
 // api 地址
-export type CardType =
-  | "accomplish"
-  | "cancel"
-  | "retracted"
-  | "treated"
-  | "approve";
+
+export type CardProcess_Underapproval = ['COMMIT', 'REVOKE', 'START', 'SUSPEND', 'ACTIVE', 'BACK']
+export type CardProcess_Approved = ['PASS', 'STOP', 'CANCEL', 'VETO']
+
+// PROCESS_COMMIT 审批中,
+// PROCESS_REVOKE审批中, 
+// PROCESS_START 审批中,
+// PROCESS_SUSPEND审批中,
+// PROCESS_ACTIVE 审批中;
+// PROCESS_BACK审批中,
+
+
+// PROCESS_PASS 已审批,
+// PROCESS_STOP  已审批,
+// PROCESS_CANCEL 已审批,
+// PROCESS_VETO 已审批,
+
+// 如果他传过来的值等于审批中数组中的任意一个就显示绿色。
+
 
 export type CardTypecolor = "red" | "green" | "blue" | "red" | "white"; //联合类型
 
@@ -19,12 +33,24 @@ export interface StateColorMap {
 }
 
 export interface CardProp {
-  texts?: CardType;
-  info?: string;
-  time?: string;
-  text?: string;
-  title?: string;
-  id?: number;
+  /**
+   * taskName：任务名称
+   * processInstanceTitle：流程类型
+   * processInstanceStatusStr: 环节类型
+   * createTime: 创建时间
+   * processInstanceStatus: 状态
+   * CardProcess_Underapproval: 审批中
+   * CardProcess_Approved: 已审批
+   * 
+   */
+  processDefinitionName?: string;
+  processInstanceTitle?: string;
+  processInstanceStatusStr?: string;
+  createTime?: string;
+  processInstanceStatus?: string;
+  CardProcessUnderapproval?: CardProcess_Underapproval;
+  CardProcessApproved?: CardProcess_Approved;
+  number?: number;
   accomplish?: string;
   color?: CardTypecolor;
 }

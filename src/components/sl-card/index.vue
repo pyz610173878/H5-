@@ -4,8 +4,6 @@ defineOptions({
   name: "Slcard" // 组件名
 });
 
-// 不透传某些属性比如class, 我们可以通过useAttrs来实现
-
 const attrs = useAttrs();
 const filteredAttrs = computed(() => {
   return { ...attrs, class: undefined };

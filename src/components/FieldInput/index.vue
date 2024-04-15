@@ -3,32 +3,31 @@ import { ref } from "vue";
 import Button from "@/components/Button/Button.vue";
 import { reactive } from "vue";
 
-
 interface Notice_Data {
   question_data: string;
   TaskList_data: number;
-  text?:string;
+  text?: string;
 }
 
-const Notice_Datas:Notice_Data = reactive({
+const Notice_Datas: Notice_Data = reactive({
   question_data: "",
   TaskList_data: 0,
-  text:'共有条待办数据'
+  text: "共有条待办数据"
 });
 
-const onSubmit = (values) => {
-      console.log('submit', values);
-      console.log('submit', Notice_Datas.question_data);
-      
-    };
+const task = ref(true);
+
+const onSubmit = values => {
+  //
+};
 </script>
 
 <template>
   <div>
-    <van-form @submit="onSubmit"
-    >
+    <van-form @submit="onSubmit">
       <van-cell-group inset>
         <van-field
+          @keyup.enter="onSubmit"
           center
           v-model="Notice_Datas.question_data"
           class="sl-field--content"
@@ -37,14 +36,43 @@ const onSubmit = (values) => {
           placeholder="请输入问题描述"
         >
           <template #button>
-            <van-button native-type="submit" class="sl-button--width" hairline size="small" type="primary" round>搜索</van-button>
+            <van-button
+              native-type="submit"
+              class="sl-button--width"
+              hairline
+              size="small"
+              type="primary"
+              round
+              >搜索</van-button
+            >
           </template>
         </van-field>
         <div class="mt-2 mb-2">
-        <p class="text-center">
-          <span>{{`共有${}条待办数据`}}</span>
-        </p>
-      </div>
+          <p class="text-center text-sm font-normal">
+            <van-icon name="notes-o" size="1.25rem" />
+            <span class="ml-1" v-if="task">
+              <!-- <svg-icon name="List_"/> -->
+              共有<span class="text-sky-400">{{ 123 }}</span
+              >条待办数据</span
+            >
+            <span class="ml-1" v-else>
+              <!-- <svg-icon name="List_"/> -->
+              共有<span class="text-sky-400">{{ 123 }}</span
+              >条处理任务</span
+            >
+
+            <!-- <span>{{`共有${123}条待办数据`}}</span> -->
+          </p>
+         
+        </div>
+        <van-divider
+            :style="{
+              color: '#FFFFFF',
+              borderColor: '#E1E1E1',
+              padding: '0 0',
+              hairline:false
+            }"
+          />
       </van-cell-group>
     </van-form>
   </div>
@@ -58,14 +86,23 @@ const onSubmit = (values) => {
   margin-top: 15px;
 }
 
-.van-field ::v-deep.sl-field--content .van-field__left-icon {
+/* 深度选择器  */
+.van-field :deep(.van-field__left-icon) {
   margin-left: 10px;
 }
 
-.van-field__body .van-field__button .van-button--hairline ::v-deep.sl-button--width  {
-    width: 50px;
-    height: 30px;
+.van-field__body
+  .van-field__button
+  .van-button--hairline
+  ::v-deep.sl-button--width {
+  width: 50px;
+  height: 30px;
 }
+
+/* .van-field__button :deep(.van-button--hairline) {
+  width: 70px;
+  height: 30px;
+} */
 
 /* 穿透的对象是要你自己定义的class属性。
    2. 穿透的前缀是 ::v-deep

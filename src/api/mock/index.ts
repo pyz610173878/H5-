@@ -21,8 +21,3 @@ export function getListApiError(data?: object): Promise<ListResult> {
     data
   });
 }
-
-
-
-
-

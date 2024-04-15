@@ -7,15 +7,13 @@
       <van-tab title="已阅" to="read"></van-tab>
       <van-tab title="申请" to="applyfor"></van-tab>
     </van-tabs>
-
   </div>
 </template>
 <script setup lang="ts">
-import { ref,reactive } from "vue";
+import { ref, reactive } from "vue";
 
 const active = ref(0);
-console.log(active.value, 'active');
-
+//
 </script>
 
 <style scoped></style>

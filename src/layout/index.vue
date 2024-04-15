@@ -14,7 +14,9 @@ const cachedViews = computed(() => {
 <template>
   <div class="app-wrapper px-3 pt-3">
     <van-config-provider :theme="useDarkMode() ? 'dark' : 'light'">
-      <nav-bar />
+      <nav-bar>
+        
+      </nav-bar>
       <!-- 这里的知识点还需要学习一下。 -->
       <router-view v-slot="{ Component }">
         <keep-alive :include="cachedViews">
@@ -34,5 +36,6 @@ const cachedViews = computed(() => {
   position: relative;
   height: 100%;
   width: 100%;
+  background-color: rgba(246, 246, 246, 1)
 }
 </style>

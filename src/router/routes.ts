@@ -11,13 +11,15 @@ import statistics from "@/views/statistics/index.vue";
 import active from "@/views/active/index.vue";
 import equipment from "@/views/equipment/index.vue";
 import approvalList from "@/views/ApprovalList/index.vue";
-
+import BlankPage from "@/views/BlankPage/index.vue";
+// 路由配置 name 路径 component 组件 meta 元信息
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "root",
     component: Layout,
-    redirect: { name: "HomePage" },
+    redirect: { name: "BlankPage" },
+    props: { name: "HomePage" },
     children: [
       {
         path: "homepage",
@@ -57,14 +59,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Read/index.vue"),
         meta: {
           title: "已阅"
-        }
-      },
-      {
-        path: "apllyfor",
-        name: "Apllyfor",
-        component: () => import("@/views/Apllyfor/index.vue"),
-        meta: {
-          title: "申请"
         }
       },
       {
@@ -188,7 +182,22 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/tasklist",
     name: "TaskList",
-    component: () => import("@/views/TaskList/index.vue"),
+    component: () => import("@/views/TaskList/index.vue")
+  },
+  {
+    path: "/mynews",
+    name: "NyNew",
+    component: () => import("@/views/MyNew/index.vue")
+  },
+  {
+    path: "/myreminder",
+    name: "MyReminder",
+    component: () => import("@/views/MyReminder/index.vue")
+  },
+  {
+    path: "/BlankPage",
+    name: "BlankPage",
+    component: () => import("@/views/BlankPage/index.vue")
   }
 ];
 
