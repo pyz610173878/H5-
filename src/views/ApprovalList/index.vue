@@ -13,7 +13,7 @@ import NavBar from "@/components/NavBar/index.vue";
 
 const showList: string[] = reactive([]);
 
-const { Datas, handlerGetTodoList } = GetInfoCard();
+const { examine_Data, handlerGetTodoList, handlergetDoneTask } = GetInfoCard();
 
 const handleSuccessReq = async () => {
   const { list } = await getListApi();
@@ -32,15 +32,9 @@ const handleErrorReq = () => {
 
 const onClickLeft = () => history.back();
 
-const notice = reactive({
-  待办: "对应接口数据",
-  待阅: "对应接口数据",
-  已办: "对应接口数据",
-  已阅: "对应接口数据",
-  申请: "对应接口数据"
-});
 // 下一步呢？
 const active = ref("");
+const task = ref(false);
 
 const test = ref("审批管理");
 
@@ -51,22 +45,54 @@ onMounted(() => {
   active.value = query.name;
 });
 onBeforeMount(() => {
-  // const { Datas } = GetInfoCard();
+  const { examine_Data } = GetInfoCard();
   handlerGetTodoList(5);
+  handlergetDoneTask(5);
+  // 把数据全部拿过来
 });
+
+// 只展示4条最新的数据。
 </script>
 <template>
   <div>
     <NavBar :title="test" />
-    <van-tabs v-model:active="active" >
-      <FieldInput />
+    <van-tabs v-model:active="active">
+      <FieldInput>
+        <template #examine_totalCount>
+          <span class="ml-1">
+            <!-- <svg-icon name="List_"/> -->
+            共有<span class="text-sky-400">{{
+              examine_Data.title_name[active]
+            }}</span
+            >条待办数据</span
+          >
+        </template>
+      </FieldInput>
+      <div class="mb-4"></div>
       <van-tab title="待办" name="待办">
-        <infoCard :card_Data="Datas.card_Data" />
+        <infoCard :card_Data="examine_Data.card_Data" />
       </van-tab>
       <van-tab title="待阅" name="待阅"></van-tab>
-      <van-tab title="已办" name="已办"></van-tab>
+      <van-tab title="已办" name="已办">
+        <infoCard :card_Data="examine_Data.TaskDone_Data" />
+      </van-tab>
       <van-tab title="已阅" name="已阅"></van-tab>
       <van-tab title="申请" name="申请"></van-tab>
     </van-tabs>
+
+    <van-skeleton>
+  <template #template>
+    <div :style="{ display: 'flex', width: '100%' }">
+      <van-skeleton-image />
+      <div :style="{ flex: 1, marginLeft: '16px' }">
+        <van-skeleton-paragraph row-width="60%" />
+        <van-skeleton-paragraph />
+        <van-skeleton-paragraph />
+        <van-skeleton-paragraph />
+      </div>
+    </div>
+  </template>
+</van-skeleton>
+
   </div>
 </template>

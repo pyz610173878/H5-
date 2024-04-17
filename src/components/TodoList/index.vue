@@ -9,14 +9,15 @@
   >
     <van-tabbar-item
       v-for="(item, index) in props.tabbarDatas"
-      
       :key="item.id"
       :to="'/tools?name=' + item.title"
       v-bind="$attrs"
     >
-    <!-- 待解决问题1 [Vue warn]: Property "index" was accessed during render but is not defined on instance -->
+      <!-- 待解决问题1 [Vue warn]: Property "index" was accessed during render but is not defined on instance -->
       <template #icon="">
-        <img :src="item.icon" class="test1" />
+        <!-- <img :src="item.icon" class="test1" /> -->
+        <!-- {{ item.icon }} -->
+        <svg-icon :name="item.icon" class="test1"></svg-icon>
       </template>
       <span class="text-slate-950 font-normal text-xs text-center">{{
         item.title
@@ -43,8 +44,8 @@ const active = ref(0);
 
 <style scoped>
 .test1 {
-  width: 48px;
-  height: 48px;
+  width: 45px;
+  height: 45px;
 }
 
 /* ::v-deep usage as a combinator has been deprecated. Use  */

@@ -3,6 +3,7 @@ import { number } from "echarts";
 import {
   GetTodoTask,
   GetDoneTask,
+  GetCompletedList,
   GetReadingList,
   GetReadoneList,
   GetApplicationList
@@ -39,13 +40,12 @@ export const GetInfoCard = () => {
     totalCount: undefined,
     card_Data: [],
     title_name: {
-      待办: undefined,
-      待阅: undefined,
-      已办: undefined,
-      已阅: undefined,
-      申请: undefined
-    },
-    TaskDone_Data: []
+      待办: 2,
+      待阅: 3,
+      已办: 4,
+      已阅: 5,
+      申请: 6
+    }
   });
 
   // 把数据传递到这个对象里面。
@@ -82,15 +82,14 @@ export const GetInfoCard = () => {
    * 处理已办事项列表
    * @returns
    */
-  const handlergetDoneTask = () => {
-    return GetDoneTask().then(response => {
-      examine_Data.value.TaskDone_Data = response.data;
-      examine_Data.value.title_name["已办"] = response.totalCount;
-      //
+  // const handlerGetCompletedList = () => {
+  //   return GetCompletedList().then((response) => {
+  //     infoData.category_options = response.data;
+  //     //
 
-      //
-    });
-  };
+  //     //
+  //   });
+  // };
   /**
    * 处理待阅事项列表
    * @returns
@@ -133,7 +132,6 @@ export const GetInfoCard = () => {
   return {
     examine_Data,
     Data,
-    handlerGetTodoList,
-    handlergetDoneTask
+    handlerGetTodoList
   };
 };

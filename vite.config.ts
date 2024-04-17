@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, root, "");
   return {
     base: env.VITE_PUBLIC_PATH || "/",
+    // 插件
     plugins: [
       vue(),
       vueJsx(),
@@ -51,6 +52,8 @@ export default defineConfig(({ mode }) => {
       }),
       // 生产环境默认不启用 CDN 加速
       enableCDN(env.VITE_CDN_DEPS)
+
+      //
     ],
     resolve: {
       alias: {

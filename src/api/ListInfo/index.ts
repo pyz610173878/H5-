@@ -4,6 +4,7 @@ type ListResult = {
   code: number;
   message: string;
   data: Array<any>;
+  totalCount: number;
 };
 
 /**
@@ -25,10 +26,10 @@ export function GetTodoTask(data?: number): Promise<ListResult> {
  * @returns
  */
 
-export function GetCompletedList(data?: object): Promise<ListResult> {
+export function GetDoneTask(data?: any): Promise<ListResult> {
   return http.request({
-    url: "/list/error",
-    method: "get",
+    url: "hpcc-tms/v1_0/module/workflow-v1/doneTask",
+    method: "post",
     data
   });
 }

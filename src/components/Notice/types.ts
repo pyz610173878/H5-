@@ -1,6 +1,6 @@
 export type Noticetype = "未读" | "已读";
 export type Noticetypecolor = "blue" | "whitie";
-export type NoticeContainerSize = 'large' | 'small'
+export type NoticeContainerSize = "large" | "small";
 
 export interface NoticeProps {
   title: string; // 通知标题
@@ -9,5 +9,5 @@ export interface NoticeProps {
   id?: number;
   type: string; // 通知类型
   color?: Noticetypecolor;
-  container?:NoticeContainerSize;
+  container?: NoticeContainerSize;
 }

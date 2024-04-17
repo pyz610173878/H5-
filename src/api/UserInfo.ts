@@ -29,4 +29,3 @@ export function getDatail(data?: number): Promise<ListResult> {
     data
   });
 }
-

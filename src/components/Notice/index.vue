@@ -27,7 +27,7 @@ const props = defineProps<{
 
       <div class="sl-notice--title flex items-center">
         <!-- 默认显示的东西 -->
-        <slot name=icon :type="item.type">
+        <slot name="icon" :type="item.type">
           <!-- <p class="inline-block mr-1.5">
             <svg-icon
               :name="item.type === '未读' ? 'MynewsOpen' : 'MynewsClose'"
@@ -44,7 +44,7 @@ const props = defineProps<{
             {{ item.content }}
           </slot>
         </span>
-        <span class="float-right sl-text--10 leading-6">
+        <span class="float-right sl--text-10 leading-6">
           {{ item.datatime }}
         </span>
       </div>

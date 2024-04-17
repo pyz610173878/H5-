@@ -8,7 +8,6 @@
 -->
 
 <script setup lang="ts" name="">
-import { defineProps, defineEmits } from "vue";
 import { ref, reactive, onBeforeMount, onMounted, watch, computed } from "vue";
 import { getCode } from "@/utils/validate";
 import { useRouter, useRoute } from "vue-router";
@@ -38,7 +37,7 @@ onBeforeMount(() => {
       console.log(store.User_info, "用户信息");
     });
   };
-    // GetUserCode()
+  GetUserCode();
 });
 
 watch(DataRef, (newVal, oldVal) => {
@@ -46,7 +45,7 @@ watch(DataRef, (newVal, oldVal) => {
 });
 onMounted(() => {
   // 在这里执行挂载后的操作
-  navigateToHomePage()
+  navigateToHomePage();
 });
 </script>
 

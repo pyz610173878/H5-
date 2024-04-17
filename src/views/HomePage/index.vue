@@ -1,3 +1,47 @@
+<template>
+  <div class="" id="homepage">
+    <Echart></Echart>
+    <div class="mb-6"></div>
+    <div>
+      <Todoview :tabbarDatas="tabbarDatas" />
+    </div>
+    <div class="mt-6 w-full">
+      <!-- 待办列表 -->
+
+      <div class="w-2/4 inline-block">
+        <ExamineDisplay :Examine_Data="Datass.Examine_Data" :column-num="2" />
+      </div>
+
+      <div class="w-1/4 inline-block">
+        <ExamineDisplay
+          :Examine_Data="Datas.Examine_Data"
+          :column-num="1"
+          :to="'/tasklist'"
+        />
+      </div>
+
+      <div class="w-1/4 inline-block">
+        <ExamineDisplay
+          :Examine_Data="Dataes.Examine_Data"
+          :column-num="1"
+          :to="'/myreminder'"
+        />
+      </div>
+    </div>
+
+    <p class="mt-3 text-sm font-normal text-black">
+      {{ HomePage.notice }}
+    </p>
+
+    <div>
+      <van-skeleton :row="3" :loading="loading">
+        <Notice :notice_data="Data.Notice_Data">
+          <!-- <van-skeleton title :row="3" /> -->
+        </Notice>
+      </van-skeleton>
+    </div>
+  </div>
+</template>
 <script setup lang="ts" name="HomePage">
 import {
   reactive,
@@ -15,13 +59,17 @@ import { useCachedViewStore } from "@/store/modules/cachedView";
 import { getDatail, getDoneTask } from "@/api/UserInfo";
 import Notice from "@/components/Notice/index.vue";
 import { GetNoticeInfo } from "@/hooks/useNoticeinfo";
+import { GetTabbarData } from "@/hooks/useTabbarData";
 const { Data, handlerGetNoticeList } = GetNoticeInfo(); // 获取通知公告数据
+const { tabbarDatas } = GetTabbarData(); // 获取tabbar数据
+
+const loading = ref(true);
 
 const store = useCachedViewStore();
 //
 const TabbarDatas = reactive([
   {
-    icon: `/src/assets/Photos/planning.png`,
+    icon: `/src/icons/svg/Bearing.svg`,
     title: "质量策划",
     to: {
       name: "Tools"
@@ -100,6 +148,11 @@ const DataRef = ref([
   "特种设备管理"
 ]);
 
+setTimeout(() => {
+  loading.value = false;
+  // false  不进行显示
+}, 1500);
+
 onBeforeMount(() => {
   //   // 在这里执行挂载前的操作
   const store = useCachedViewStore();
@@ -118,49 +171,6 @@ onMounted(() => {
 });
 </script>
 
-<template>
-  <div class="">
-    <Echart></Echart>
-    <!-- 1. 固定定位是一直不动-->
-    <div class="mb-6"></div>
-    <div>
-      <Todoview :tabbarDatas="TabbarDatas" />
-    </div>
-    <div class="mt-6">
-      <!-- 待办列表 -->
-
-      <div class="w-44 inline-block">
-        <ExamineDisplay :Examine_Data="Datass.Examine_Data" :column-num="2" />
-      </div>
-
-      <div class="w-87 inline-block">
-        <ExamineDisplay
-          :Examine_Data="Datas.Examine_Data"
-          :column-num="1"
-          :to="'/tasklist'"
-        />
-      </div>
-
-      <div class="w-87 inline-block">
-        <ExamineDisplay
-          :Examine_Data="Dataes.Examine_Data"
-          :column-num="1"
-          :to="'/myreminder'"
-        />
-      </div>
-    </div>
-
-    <p class="mt-6 text-sm font-normal text-black">
-      {{ HomePage.notice }}
-    </p>
-
-    <div>
-      <Notice :notice_data="Data.Notice_Data">
-      </Notice>
-    </div>
-  </div>
-</template>
-
 <style scoped>
 .van-cell ::v-deep.sl-field--content {
   border-radius: 50px;
@@ -173,5 +183,9 @@ onMounted(() => {
 
 .w-87 {
   width: 87px;
+}
+
+#homepage {
+  overflow-x: hidden;
 }
 </style>

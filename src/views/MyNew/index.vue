@@ -33,9 +33,7 @@ onMounted(() => {
     <div>
       <van-tabs v-model:active="active">
         <van-tab title="全部" name="全部">
-          <Notice :notice_data="Data.Notice_Data" class="px-2">
-           
-          </Notice>
+          <Notice :notice_data="Data.Notice_Data" class="px-2"> </Notice>
         </van-tab>
         <van-tab title="已读" name="已读">
           <Notice :notice_data="Data.Notice_Data" />
@@ -48,5 +46,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

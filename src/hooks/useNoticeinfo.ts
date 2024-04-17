@@ -3,7 +3,7 @@ import { GetNoticeList } from "@/api/ListInfo/index";
 
 /**
  * 获取通知公告列表数据
- * @returns 
+ * @returns
  */
 export const GetNoticeInfo = () => {
   // 还有一个问题，通知公告的排序的问题。
@@ -42,15 +42,15 @@ export const GetNoticeInfo = () => {
   const handlerGetNoticeList = () => {
     Data.value.Notice_Data = response.data;
     //
-  }
+  };
   const getCode = (herf: string) => {
     const regex = /code=([^&]*)/;
     const match = herf.match(regex);
     return match[1];
-  }
+  };
 
   return {
     Data,
-    handlerGetNoticeList,
+    handlerGetNoticeList
   };
 };

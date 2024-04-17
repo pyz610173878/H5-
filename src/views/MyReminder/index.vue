@@ -45,16 +45,11 @@ onMounted(() => {
             </template>
           </Notice>
         </van-tab>
-        <van-tab title="已读" name="已读">
-          
-        </van-tab>
-        <van-tab title="未读" name="未读">
-          
-        </van-tab>
+        <van-tab title="已读" name="已读"> </van-tab>
+        <van-tab title="未读" name="未读"> </van-tab>
       </van-tabs>
     </div>
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

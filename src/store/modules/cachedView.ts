@@ -11,7 +11,6 @@ import { store } from "@/store";
 import type { toRouteType } from "@/router";
 import { number } from "echarts";
 
-
 /**
  * pinia对象
  */
@@ -20,7 +19,7 @@ export const useCachedViewStore = defineStore({
   state: () => ({
     // 缓存页面 keepAlive
     cachedViewList: [] as string[],
-    Code:'' as string,
+    Code: "" as string,
     User_info: {
       errcode: 0 as number,
       userid: "" as string,
@@ -32,9 +31,8 @@ export const useCachedViewStore = defineStore({
       biz_mail: "" as string,
       address: "" as string,
       userNo: "" as string,
-      qywxToken: "" as string,
+      qywxToken: "" as string
     }
-
   }),
   actions: {
     addCachedView(view: toRouteType) {
@@ -53,7 +51,6 @@ export const useCachedViewStore = defineStore({
     }
   }
 });
-
 
 export function useCachedViewStoreHook() {
   return useCachedViewStore(store);

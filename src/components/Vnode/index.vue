@@ -25,24 +25,19 @@ onMounted(() => {
   // 在这里执行挂载后的操作
 });
 
-
 const title1 = ref("编码人生");
 const title2 = ref("Vue3技术细节");
 </script>
 
 <template>
-  <div class=" border-collapse "
-  >
+  <div class="border-collapse">
     北京时间:2024-09-09 09:09:09
-  
-    <slot name="header" message="hello" :count="2">
 
+    <slot name="header" message="hello" :count="2">
       <h1>header插槽</h1>
     </slot>
     <span>
-      <slot title="编码人生" content="我的未来">
-        默认插槽
-      </slot>
+      <slot title="编码人生" content="我的未来"> 默认插槽 </slot>
     </span>
   </div>
 </template>

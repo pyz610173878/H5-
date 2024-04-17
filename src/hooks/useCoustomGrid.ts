@@ -4,7 +4,7 @@ import { ref } from "vue";
 const types = ref(["待办", "待阅", "已办", "已阅", "申请"]);
 /**
  * 获取待办列表和任务列表数据
- * @returns 
+ * @returns
  */
 export const GetExamine = () => {
   const response = {
@@ -30,9 +30,9 @@ export const GetExamine = () => {
     Task_Datas: []
   });
 
-  const Examine_Data =ref({
+  const Examine_Data = ref({
     Data: []
-  })
+  });
   const handlerGetExamine = () => {
     // return GetExamine().then((response) => {
     //     List_Data.value.Examine_Data = response.data;

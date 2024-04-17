@@ -15,7 +15,9 @@ import { GetExamine } from "@/hooks/useCoustomGrid";
 import Button from "@/components/Button/Button.vue";
 import Vnode from "@/components/Vnode.js";
 import Vnodes from "@/components/Vnode/index.vue";
-const { List_Data, Examine_Data, handlerGetExamine, handlerGetTaskData } = GetExamine();
+import UserContainer from "@/components/UserInfo/index.vue"
+const { List_Data, Examine_Data, handlerGetExamine, handlerGetTaskData } =
+  GetExamine();
 
 const test = ref("审批管理");
 const number = ref(5);
@@ -84,24 +86,37 @@ const test1 = ref("任务管理");
 </script>
 
 <template>
-  <div class="pb-4 sl-user-container px-4">
-    <div class="flex justify-between items-center  bg-white p-5 sl-user-car border-solid border-2 rounded-lg">
+  <div class="pb-4 sl-user-container">
+    <div
+      class="flex items-center justify-between bg-white p-5 sl-user-car border-solid border--2 rounded-lg"
+    >
       <!-- 1. 个人信息页面  -->
-      <div>
-        <img :src="store.User_info.avatar" alt="" class="rounded-full w-11 h-11 mr-2" />
-        <!-- 预留需求位置 -->
-        <p class="font-normal text-black text-base leading-4">
-          {{ store.User_info.userid }}
-        </p>
-        <p class="mt-1 sl-text--10">{{ store.User_info.userNo }}</p>
+      <div class="flex">
+        <img
+          :src="store.User_info.avatar"
+          alt=""
+          class="rounded-full w-11 h-11 mr-4"
+        />
+        <div class="mt-1">
+          <p class="font-normal text-black text-base leading-4">
+            张三
+            {{ store.User_info.userid }}
+          </p>
+          <p class="mt-2 sl--text-10">
+            {{ store.User_info.userNo }}
+            SADD124241
+          </p>
+        </div>
       </div>
+
       <div>
         <van-icon name="arrow" class="" />
       </div>
     </div>
   </div>
-  <div class="pb-4 px-4">
-    <div class="p-4 h-28 border-solid border-2 rounded-lg bg-white">
+  <!-- 审批管理 -->
+  <div class="">
+    <div class="mb-4 p-4 h-28 border-solid border--2 rounded-lg bg-white">
       <div>
         <p class="mb-2 font-bold text-base leading-4 text-black">
           {{ test }}
@@ -110,43 +125,89 @@ const test1 = ref("任务管理");
       <ExamineDisplay :Examine_Data="Examine_Data.Data" :column-num="5" />
     </div>
   </div>
-  <div class="pb-4 px-4">
-    <div class="bg-white p-4 h-28 border-solid border-2 rounded-lg">
-      <p class="mb-4 font-bold text-base leading-4 text-black">
-        {{ Task_management }}
-      </p>
-      <ExamineDisplay v-model="number"  :Examine_Data="List_Data.Task_Datas"
-        :column-num="3" />
-    </div>
+  <!-- 任务管理 -->
+  <div class="bg-white p-4 h-28 border-solid border--2 rounded-lg mb-4">
+    <p class="mb-4 font-bold text-base leading-4 text-black">
+      {{ Task_management }}
+    </p>
+    <ExamineDisplay
+      v-model="number"
+      :Examine_Data="List_Data.Task_Datas"
+      :column-num="3"
+    />
   </div>
+<UserContainer>
 
-  <div class="pb-4 px-4">
-    <div class="px-4 p-4 sl-user-car border-solid border-2 rounded-lg">
-      <van-grid direction="horizontal" clickable :column-num="1" :border="false">
-        <!-- <van-grid-item v-for="item in groceryList3" :key="item.id">
-          <div>
-            <p>{{ item.id }}</p>
-            <p>{{ item.text }}</p>
-          </div>
-        </van-grid-item> -->
-
-        <!-- <van-grid-item icon="arrow" text="路由跳转" to="/tools" />
-        <van-grid-item icon="search" text="URL 跳转" url="https://github.com" /> -->
-      </van-grid>
+</UserContainer>
+  <!-- 我的提醒 -->
+  <!-- <div class="">
+    <div
+      class="bg-white px-4 p-4 sl-user-car border-solid border--2 rounded-lg"
+    >
+    <div class="mb-2 w-full bg-white flex justify-between items-center">
+      <div class="flex  ">
+        <img src="" alt="" class="w-5 h-5 mr-2">
+    
+    <p>  我的提醒</p>
+      </div>
+      <div>
+         <span>22</span>
+         <van-icon name="arrow" class="" />
+      </div>
+  
     </div>
-  </div>
-  <!-- <Vnodes>
-    <template #default="{ title, content }">
-      {{ title }}
-      {{ content }}
+    <van-divider :style="{ color: '#f5f5f5', borderColor: '#f5f5f5'}"/>
+   
 
-    </template>
-<template #header="headerProps">
-      {{ headerProps.message }}
-      {{ headerProps.count }}
-      <h1>这是一个插槽</h1>
-    </template>
-</Vnodes> -->
+    <div class="mt-3 w-full bg-white flex justify-between items-center">
+      <div class="flex">
+        <img src="" alt="" class="w-5 h-5 mr-2">
+    
+    <p>  我的提醒</p>
+      </div>
+      <div>
+         <span>22</span>
+         <van-icon name="arrow" class="" />
+      </div>
+  
+    </div>
+    
+  </div>
+  </div> -->
+
+  <!-- 尝试封装成一个组件。提供插槽
+  图标
+  文字
+  箭头 可自定义
+  -->
+  <!-- <div class="px-4 bg-white w-full h-28 rounded-lg">
+    <div class="h-1/2 py-4 bg-white flex justify-between items-center">
+      <div class="flex">
+        <img src="" alt="" class="w-5 h-5 mr-2" />
+
+        <p>我的提醒</p>
+      </div>
+      <div>
+        <span>22</span>
+        <van-icon name="arrow" class="" />
+      </div>
+      
+    </div>
+
+    
+    
+    <div class="h-1/2 py-4 bg-white flex justify-between items-center">
+      <div class="flex">
+        <img src="" alt="" class="w-5 h-5 mr-2" />
+
+        <p>我的消息</p>
+      </div>
+      <div>
+        <span>22</span>
+        <van-icon name="arrow" class="" />
+      </div>
+    </div>
+  </div> -->
 </template>
 
 <style scoped>

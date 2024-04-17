@@ -1,9 +1,9 @@
 export interface TabbarData {
-  id:number;
+  id: number;
   icon: string;
   title: string;
   to: {
     name: string;
-  },
-  names:[string];
+  };
+  names: [string];
 }

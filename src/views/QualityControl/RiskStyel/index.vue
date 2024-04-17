@@ -1,5 +1,4 @@
 <script setup lang="ts" name="">
-import { defineProps, defineEmits } from "vue";
 import { ref, reactive, onBeforeMount, onMounted, watch, computed } from "vue";
 
 const Data = reactive({});

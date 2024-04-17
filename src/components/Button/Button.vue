@@ -10,17 +10,13 @@
       <slot />
     </span>
 
-  
-      <div class="h-20 w-40">
-      <slot>
-      </slot>
+    <div class="h-20 w-40">
+      <slot> </slot>
 
       <slot name="slot1"></slot>
 
       <slot name="slot2" msg="hello world"></slot>
-    
-  </div>
-    
+    </div>
   </button>
 </template>
 

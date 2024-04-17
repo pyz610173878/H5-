@@ -2,16 +2,22 @@ import { number } from "echarts";
 import { reactive } from "vue";
 // api 地址
 
-export type CardProcess_Underapproval = ['COMMIT', 'REVOKE', 'START', 'SUSPEND', 'ACTIVE', 'BACK']
-export type CardProcess_Approved = ['PASS', 'STOP', 'CANCEL', 'VETO']
+export type CardProcess_Underapproval = [
+  "COMMIT",
+  "REVOKE",
+  "START",
+  "SUSPEND",
+  "ACTIVE",
+  "BACK"
+];
+export type CardProcess_Approved = ["PASS", "STOP", "CANCEL", "VETO"];
 
 // PROCESS_COMMIT 审批中,
-// PROCESS_REVOKE审批中, 
+// PROCESS_REVOKE审批中,
 // PROCESS_START 审批中,
 // PROCESS_SUSPEND审批中,
 // PROCESS_ACTIVE 审批中;
 // PROCESS_BACK审批中,
-
 
 // PROCESS_PASS 已审批,
 // PROCESS_STOP  已审批,
@@ -19,7 +25,6 @@ export type CardProcess_Approved = ['PASS', 'STOP', 'CANCEL', 'VETO']
 // PROCESS_VETO 已审批,
 
 // 如果他传过来的值等于审批中数组中的任意一个就显示绿色。
-
 
 export type CardTypecolor = "red" | "green" | "blue" | "red" | "white"; //联合类型
 
@@ -41,7 +46,7 @@ export interface CardProp {
    * processInstanceStatus: 状态
    * CardProcess_Underapproval: 审批中
    * CardProcess_Approved: 已审批
-   * 
+   *
    */
   processDefinitionName?: string;
   processInstanceTitle?: string;

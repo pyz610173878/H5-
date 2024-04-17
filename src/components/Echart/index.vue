@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white p-2 h-36 border-solid border-2 rounded-lg quality-control--container"
+    class="bg-white p-2 h-36 border-solid border--2 rounded-lg quality-control--container"
   >
     <p
       class="van-hairline--bottom font-normal text-base text-black leading-4 h-5"

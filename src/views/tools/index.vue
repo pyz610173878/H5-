@@ -85,7 +85,6 @@ onBeforeMount(() => {
 
   // console.log(activeNames.value);
   activeNames.value.unshift(route.query.name as string);
-  
 });
 
 watch(DataRef, (newVal, oldVal) => {

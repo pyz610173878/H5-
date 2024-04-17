@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import Button from "@/components/Button/Button.vue";
-import { reactive } from "vue";
+import { reactive, ref, onMounted, onBeforeMount } from "vue";
+import { GetInfoCard } from "@/hooks/useCardInfo";
 
+// 获取审批管理卡片数据
+const { examine_Data, handlerGetTodoList } = GetInfoCard();
 interface Notice_Data {
   question_data: string;
   TaskList_data: number;
@@ -15,11 +17,21 @@ const Notice_Datas: Notice_Data = reactive({
   text: "共有条待办数据"
 });
 
+// 把数据全部搞过来，搞一个对象。
+
 const task = ref(true);
 
 const onSubmit = values => {
   //
 };
+
+onMounted(() => {
+  // 挂载之前的操作
+  const { examine_Data } = GetInfoCard();
+  // 把所有数据都拿过来。在进行判断。八个状态
+  handlerGetTodoList(2);
+});
+onBeforeMount(() => {});
 </script>
 
 <template>
@@ -50,29 +62,27 @@ const onSubmit = values => {
         <div class="mt-2 mb-2">
           <p class="text-center text-sm font-normal">
             <van-icon name="notes-o" size="1.25rem" />
-            <span class="ml-1" v-if="task">
-              <!-- <svg-icon name="List_"/> -->
-              共有<span class="text-sky-400">{{ 123 }}</span
+            <slot name="examine_totalCount">
+              <!-- <span class="ml-1" v-if="task">
+              共有<span class="text-sky-400">{{ ex.totalCount }}</span
               >条待办数据</span
             >
             <span class="ml-1" v-else>
-              <!-- <svg-icon name="List_"/> -->
               共有<span class="text-sky-400">{{ 123 }}</span
-              >条处理任务</span
-            >
+              >条处理任务</span> -->
+            </slot>
 
             <!-- <span>{{`共有${123}条待办数据`}}</span> -->
           </p>
-         
         </div>
         <van-divider
-            :style="{
-              color: '#FFFFFF',
-              borderColor: '#E1E1E1',
-              padding: '0 0',
-              hairline:false
-            }"
-          />
+          :style="{
+            color: '#FFFFFF',
+            borderColor: '#E1E1E1',
+            padding: '0 0',
+            hairline: false
+          }"
+        />
       </van-cell-group>
     </van-form>
   </div>
@@ -80,10 +90,10 @@ const onSubmit = values => {
 
 <style scoped>
 .van-cell ::v-deep.sl-field--content {
-  background-color: #f7f8fa;
-  border-radius: 50px;
   height: 40px;
   margin-top: 15px;
+  border-radius: 50px;
+  background-color: #f7f8fa;
 }
 
 /* 深度选择器  */
@@ -98,11 +108,6 @@ const onSubmit = values => {
   width: 50px;
   height: 30px;
 }
-
-/* .van-field__button :deep(.van-button--hairline) {
-  width: 70px;
-  height: 30px;
-} */
 
 /* 穿透的对象是要你自己定义的class属性。
    2. 穿透的前缀是 ::v-deep
