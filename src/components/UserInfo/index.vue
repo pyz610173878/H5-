@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-28 px-4 rounded-lg bg-white">
     <div class="container">
-      <UserMessage @click="test1">
+      <UserMessage @click="navigateToMynews">
         <template #IconText> </template>
       </UserMessage>
       <van-divider :style="{ color: '#f5f5f5', borderColor: '#f5f5f5' }" />
@@ -22,9 +22,10 @@ import UserReminder from "./UserReminder.vue";
 const Data = reactive({});
 const DataRef = ref();
 const store = useCachedViewStore();
+const router = useRouter();
 
-const test1 = (x: number) => {
-  console.log(123);
+const navigateToMynews = () => {
+  router.push({ path: "/mynews" });
 };
 onBeforeMount(() => {
   // 在这里执行挂载前的操作

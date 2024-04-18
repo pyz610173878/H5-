@@ -30,14 +30,14 @@
     </div>
 
     <p class="mt-3 text-sm font-normal text-black">
+      
       {{ HomePage.notice }}
     </p>
 
     <div>
       <van-skeleton :row="3" :loading="loading">
-        <Notice :notice_data="Data.Notice_Data">
-          <!-- <van-skeleton title :row="3" /> -->
-        </Notice>
+        <!-- 只渲染三条 -->
+        <Notice :notice_data="Data.Notice_Data" class="px-0"> </Notice>
       </van-skeleton>
     </div>
   </div>
@@ -56,7 +56,6 @@ import Todoview from "@/components/Todoview/index.vue";
 import { getCode } from "@/utils/validate";
 import { getUserCode } from "@/api/UserInfo";
 import { useCachedViewStore } from "@/store/modules/cachedView";
-import { getDatail, getDoneTask } from "@/api/UserInfo";
 import Notice from "@/components/Notice/index.vue";
 import { GetNoticeInfo } from "@/hooks/useNoticeinfo";
 import { GetTabbarData } from "@/hooks/useTabbarData";
@@ -67,55 +66,6 @@ const loading = ref(true);
 
 const store = useCachedViewStore();
 //
-const TabbarDatas = reactive([
-  {
-    icon: `/src/icons/svg/Bearing.svg`,
-    title: "质量策划",
-    to: {
-      name: "Tools"
-    }
-  },
-  {
-    icon: "/src/assets/Photos/control.png",
-    title: "质量控制",
-    to: {
-      name: "Tools"
-    },
-    names: "质量控制"
-  },
-  {
-    icon: "/src/assets/Photos/active.png",
-    title: "质量活动",
-    to: {
-      name: "Tools"
-    },
-    names: "质量活动"
-  },
-  {
-    icon: "/src/assets/Photos/check.png",
-    title: "质量检查",
-    to: {
-      name: "Tools"
-    },
-    names: "质量检查"
-  },
-  {
-    icon: "/src/assets/Photos/statistics.png",
-    title: "特种统计",
-    to: {
-      name: "Tools"
-    },
-    names: "质量统计"
-  },
-  {
-    icon: "/src/assets/Photos/equipment.png",
-    title: "特种设备",
-    to: {
-      name: "Tools"
-    },
-    names: "特种设备管理"
-  }
-]);
 
 //
 const Datass = ref({
@@ -137,17 +87,6 @@ const HomePage = reactive({
   notice: "通知公告"
 });
 
-// 跳转name值
-
-const DataRef = ref([
-  "质量策划",
-  "质量控制",
-  "质量活动",
-  "质量检查",
-  "质量统计",
-  "特种设备管理"
-]);
-
 setTimeout(() => {
   loading.value = false;
   // false  不进行显示
@@ -157,7 +96,10 @@ onBeforeMount(() => {
   //   // 在这里执行挂载前的操作
   const store = useCachedViewStore();
   const { Data } = GetNoticeInfo();
-  handlerGetNoticeList();
+  const totalNumber = ref(3)
+  handlerGetNoticeList(totalNumber);
+
+
   // const codes = window.location.href;
   // store.Code = getCode(codes);
 });

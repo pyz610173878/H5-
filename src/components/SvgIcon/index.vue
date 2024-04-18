@@ -5,10 +5,12 @@ import { computed } from "vue";
 interface Props {
   name: string;
   className?: string;
+  size?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   name: "",
-  className: ""
+  className: "",
+  size: "small"
 });
 
 const isExternalIcon = computed(() => isExternal(props.name));
@@ -34,6 +36,9 @@ const styleExternalIcon = computed(() => {
     v-if="isExternalIcon"
     :style="styleExternalIcon"
     class="svg-external-icon svg-icon"
+    :class="{
+      [`sl-icon--${props.size}`]: props.size
+    }"
     v-bind="$attrs"
   />
   <!-- 增加一个size属性 -->
@@ -54,5 +59,10 @@ const styleExternalIcon = computed(() => {
 .svg-external-icon {
   background-color: currentColor;
   mask-size: cover !important;
+}
+
+.sl-icon--small {
+  width: 20px;
+  height: 20px;
 }
 </style>

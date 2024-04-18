@@ -16,6 +16,7 @@ import Button from "@/components/Button/Button.vue";
 import Vnode from "@/components/Vnode.js";
 import Vnodes from "@/components/Vnode/index.vue";
 import UserContainer from "@/components/UserInfo/index.vue"
+import Rate from "@/components/demo/index.vue"
 const { List_Data, Examine_Data, handlerGetExamine, handlerGetTaskData } =
   GetExamine();
 
@@ -138,6 +139,7 @@ const test1 = ref("任务管理");
   </div>
 <UserContainer>
 
+  
 </UserContainer>
   <!-- 我的提醒 -->
   <!-- <div class="">

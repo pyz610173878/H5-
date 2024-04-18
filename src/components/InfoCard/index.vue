@@ -7,6 +7,10 @@ import { reactive } from "vue";
 const props = defineProps<{
   card_Data: CardProp[];
 }>();
+// 第一种方式定义了一个数组props，适用于接收多个相同类型props的组件
+
+// const props = defineProps<CardProp>();
+
 
 const handerStringInArray = (str: string) => {
   const arr = ["COMMIT", "REVOKE", "START", "SUSPEND", "ACTIVE", "BACK"];
@@ -26,7 +30,7 @@ const test1 = () => {
 };
 </script>
 <template>
-  <div id="app " class="p-top--20" @click="test1">
+  <div id="app " class="p--top-20" @click="test1">
     <div
       class="pb-4 px-4"
       v-for="(item, index) in props.card_Data"
@@ -68,7 +72,7 @@ const test1 = () => {
           </div>
 
           <div class="main-content">
-            <p class="sl-text--13 sl-text--hidden">
+            <p class="sl--text-13 sl-text--hidden">
               流程类型：{{ item.processInstanceTitle }}
             </p>
             <!-- <p>

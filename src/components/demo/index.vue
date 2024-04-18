@@ -1,89 +1,41 @@
-<script setup lang="ts" name="">
-// 待办 待阅 已办 已阅列表组件
-import { defineProps, defineEmits } from "vue";
-import {
-  ref,
-  reactive,
-  onBeforeMount,
-  onMounted,
-  watch,
-  computed,
-  provide,
-  defineModel
-} from "vue";
-import { type CustomGridProps } from "@/components/CustomGrid/types";
-const Data = reactive({});
-const DataRef = ref();
-
-const props = defineProps<{
-  CustomGrid_Data: CustomGridProps[];
-}>();
-
-onBeforeMount(() => {});
-
-// 我通过控制展示组件，更改了子组件中定义的值。
-watch(DataRef, (newVal, oldVal) => {
-  // 在这里执行挂载前的操作
-});
-onMounted(() => {
-  // 在这里执行挂载后的操作
-});
-</script>
-
 <template>
   <div>
-    <!-- <div @click="update">parent bound v-model is: {{ model }}</div> -->
-    <van-grid :border="false" v-bind="$attrs">
-      <van-grid-item
-        :to="'/approvalList?name=' + item.name"
-        text="文字"
-        v-for="(item, index) in props.CustomGrid_Data"
-        :key="index"
-        v-bind="$attrs"
-      >
-        <!-- 现在笨一点的办法就是在写两个组件 -->
-        <div>
-          <p
-            class="text-center text-center text-2xl leading-7 text-center font-bold text-black"
-          >
-            {{ item.total }}
-          </p>
-          <p :type="item.type[index]">{{ item.type[index] }}</p>
-        </div>
-      </van-grid-item>
-      <van-grid-item to="/approvalList">
-        <div>
-          <p
-            class="text-center text-2xl leading-7 text-center font-bold text-black"
-          >
-            3
-          </p>
-          <p>待阅</p>
-        </div>
-      </van-grid-item>
-      <van-grid-item>
-        <div>
-          <p
-            class="text-center text-center text-2xl leading-7 text-center font-bold text-black"
-          >
-            3
-          </p>
-          <p>任务</p>
-        </div>
-      </van-grid-item>
-      <van-grid-item>
-        <div>
-          <p
-            class="text-center text-center text-2xl leading-7 text-center font-bold text-black"
-          >
-            3
-          </p>
-          <p>提醒</p>
-        </div>
-      </van-grid-item>
-    </van-grid>
+    {{ rate }}
   </div>
 </template>
 
+<script setup lang='ts' name=''>
+import { ref, reactive, onBeforeMount, onMounted, watch, computed } from 'vue';
+
+import { useRouter, useRoute } from 'vue-router';
+import { useCachedViewStore } from '@/store/modules/cachedView';
+import { start } from 'nprogress';
+const Data = reactive({});
+const DataRef = ref();
+const store = useCachedViewStore();
+onBeforeMount(() => {
+  // 在这里执行挂载前的操作
+});
+
+onMounted(() => {
+  // 在这里执行挂载后的操作
+});
+
+
+interface Props {
+  value?: Number,
+  start?: String,
+}
+const props = withDefaults(defineProps<Props>(), {
+  value: 5,
+  start: "small"
+});
+// props存在默认值，就跟原型中的属性一样。
+
+// 父组件传递值给子组件
+// 子组件监听 props，进一步转换并进行渲染。
+
+let rate = computed(() => "★★★★★☆☆☆☆☆".slice(5 - props.value, 10 - props.value))
+</script>
+
 <style scoped></style>
-@/components/Examine/types

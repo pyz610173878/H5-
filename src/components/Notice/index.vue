@@ -8,24 +8,23 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <div id="app" class="mt-3">
-    <!-- 解决不了，暂时先放着，真的想睡觉了。-->
+  <div id="app" class="mt-3 ">
     <div
       :class="{}"
       v-for="(item, index) in props.notice_data"
       :key="index"
-      class="p-4 mt-2 bg-white content rounded-xl sl-position--relative"
+      class="relative h-16 p-4 mt-2 rounded-xl bg-white"
     >
-      <div class="notice sl-positions--absolute">
+      <div class="w-12 h-12 sl-positions--absolute">
         <p
-          class="text-white sl-text--italic h-9"
+          class="h-9 sl-text--italic text-white"
           :class="item.type === '未读' ? 'bg-gray-300' : 'sl-notice--type-blue'"
         >
           {{ item.type }}
         </p>
       </div>
 
-      <div class="sl-notice--title flex items-center">
+      <div class="flex items-center sl-notice--title">
         <!-- 默认显示的东西 -->
         <slot name="icon" :type="item.type">
           <!-- <p class="inline-block mr-1.5">
@@ -34,17 +33,17 @@ const props = defineProps<{
             />
           </p> -->
         </slot>
-        <p class="text-sm sl-text--black inline-block">
+        <p class="inline-block text-sm sl-text--black ">
           {{ item.title }}
         </p>
       </div>
-      <div class="sl-notice--detail sl-text--gray">
+      <div class=" sl-text--gray">
         <span class="text-xs">
           <slot>
             {{ item.content }}
           </slot>
         </span>
-        <span class="float-right sl--text-10 leading-6">
+        <span class="float-right leading-6 sl--text-10 ">
           {{ item.datatime }}
         </span>
       </div>
@@ -53,19 +52,6 @@ const props = defineProps<{
 </template>
 
 <style scoped>
-.notice {
-  width: 48px;
-  height: 48px;
-}
-
-.content {
-  height: 67px;
-}
-
-.height {
-  height: 30px;
-  line-height: 17px;
-}
 
 .sl-notice--type-white {
   background-color: #cdcfd0;
@@ -73,19 +59,6 @@ const props = defineProps<{
 
 .sl-notice--type-blue {
   background-color: #2d80ee;
-}
-
-.sl-notice--container-small {
-  width: 351px;
-  height: 67px;
-  padding: 12px 0px 0px 0px;
-}
-
-.sl-notice--container-large {
-  width: 351px;
-  height: 73px;
-  padding: 8px 16px 8px 16px;
-  opacity: 0px;
 }
 
 .sl-text--title {

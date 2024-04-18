@@ -60,31 +60,7 @@ export interface CardProp {
   color?: CardTypecolor;
 }
 
-// export interface CardProps {
-//   infoCard_Data: CardProp[];
-// }
 
-// export const categoryHook = () => {
-//   const infoCardData: InfoCardData = reactive({
-//     infoCard_Data: []
-//   });
-
-//   const handlerGetCategory = props.value.cardProps;
-
-//   return {
-//     infoCardData,
-//     handlerGetCategory
-//   };
-// };
-// export const InfoCard = () => {
-//   const props = defineProps<{
-//     cardProps: CardProps[];
-//   }>();
-
-//   return {
-//     props,
-//   };
-// }
 
 // 定义的类型可以是一个类或者是构造函数
 

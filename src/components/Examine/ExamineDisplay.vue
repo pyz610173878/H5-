@@ -30,8 +30,6 @@ const test1 = (item, index) => {
 };
 onBeforeMount(() => {});
 
-const model = defineModel();
-
 // 我通过控制展示组件，更改了子组件中定义的值。
 watch(DataRef, (newVal, oldVal) => {
   // 在这里执行挂载前的操作

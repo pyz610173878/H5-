@@ -10,8 +10,6 @@ const { Data, handlerGetNoticeList } = GetNoticeInfo();
 // const Data = reactive({});
 const DataRef = ref();
 
-// 切换tab页双向绑定数据
-
 const active = ref("");
 onBeforeMount(() => {
   // 在这里执行挂载前的操作
@@ -19,9 +17,6 @@ onBeforeMount(() => {
   handlerGetNoticeList();
 });
 
-watch(DataRef, (newVal, oldVal) => {
-  // 在这里执行挂载前的操作
-});
 onMounted(() => {
   // 在这里执行挂载后的操作
 });
@@ -30,10 +25,10 @@ onMounted(() => {
 <template>
   <div class="">
     <NavBar title="我的消息" />
-    <div>
-      <van-tabs v-model:active="active">
+    <van-tabs v-model:active="active">
+      <div class="px-2">
         <van-tab title="全部" name="全部">
-          <Notice :notice_data="Data.Notice_Data" class="px-2"> </Notice>
+          <Notice :notice_data="Data.Notice_Data" />
         </van-tab>
         <van-tab title="已读" name="已读">
           <Notice :notice_data="Data.Notice_Data" />
@@ -41,8 +36,8 @@ onMounted(() => {
         <van-tab title="未读" name="未读">
           <Notice :notice_data="Data.Notice_Data" />
         </van-tab>
-      </van-tabs>
-    </div>
+      </div>
+    </van-tabs>
   </div>
 </template>
 
